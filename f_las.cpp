@@ -21,10 +21,8 @@
 
 /**
 * @brief Constructeur de la classe F_LAS.
-*
 * Liaison du composant avec l'arborescence Qt.
 * Création de l'interface graphique pour éditer la fenêtre.
-*
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
 F_LAS::F_LAS(QWidget *parent) :
@@ -36,7 +34,7 @@ F_LAS::F_LAS(QWidget *parent) :
 
 /**
 * @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-*
+* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
 * @param memoPtrGF: Pointeur vers GestionnaireFenetre.
 */
 void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
@@ -45,19 +43,10 @@ void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 }
 
 /**
-* @brief Destructeur de la classe F_LAS.
-* Supression de l'interface d'édition de la fenêtre.
-*/
-F_LAS::~F_LAS()
-{
-    delete ui;
-}
-
-/**
 * @brief Reception du signal du bouton de soumission du formulaire LAS.
 * Dans un premier temps la fonction va vérifier si tous les champs ont bien été remplis.
 * Si tel est le cas ces données vont être envoyées à l'objet
-* PEAO(par l'intermédiaire de l'objet GestionnaireFenetre).
+* GestionnaireFenetre.
 */
 void F_LAS::on_buttonBox_accepted()
 {
@@ -83,4 +72,13 @@ void F_LAS::on_buttonBox_accepted()
         QMessageBox::information(this, "Formulaire LAS", textAAfficher);
         //affichage de la fenêtre
 
+}
+
+/**
+* @brief Destructeur de la classe F_LAS.
+* Supression de l'interface d'édition de la fenêtre.
+*/
+F_LAS::~F_LAS()
+{
+    delete ui;
 }

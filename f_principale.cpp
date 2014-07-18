@@ -15,16 +15,15 @@
  ******************************************************************************/
 
 #include "f_principale.hpp"
-#include "peao.hpp"
+#include "gestionnairefenetre.hpp"
 #include "ui_f_principale.h"
 #include <QMessageBox>
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Constructeur de la classe F_Principale.
+* Liaison du composant avec l'arborescence Qt.
+* Création de l'interface graphique pour éditer la fenêtre.
+* @param parent: Objet auquel le composant(de Qt) sera lié.
 */
 F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
@@ -34,51 +33,47 @@ F_Principale::F_Principale(QWidget *parent) :
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
+* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
+* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
 */
 void F_Principale::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 {
     mptrGestionnaireFenetre=memoPtrGF;
 }
 
-/**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
-*/
-F_Principale::~F_Principale()
-{
-    delete ui;
-}
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Reception du signal du bouton pour débuter une opération LAS.
+* L'information sera envoyé à l'objet GestionnaireFenetre.
 */
 void F_Principale::on_boutonCommencerLAS_clicked()
 {
     //si une opération est déja en cours
-   if( mptrGestionnaireFenetre->ptrfnObtenirPointeurPEAO()->
-            bfnOperationEnCours() )
+   if( mptrGestionnaireFenetre->bfnOperationEnCours() )
    {
        QMessageBox::information(this, "Impossible de demarrer une nouvelle operation",
                                 "Une operation est deja en cours de traitement");
        return;
    }
-    mptrGestionnaireFenetre->ptrfnObtenirPointeurPEAO()->
-            fninitialiserOperation();
+    mptrGestionnaireFenetre->fninitialiserOperation();
 }
 
+/**
+* @brief Reception du signal du bouton pour stopper une opération LAS.
+* (à définir plus tard)
+*/
 void F_Principale::on_boutonCommencerLAS_2_clicked()
 {
     close();
+}
+
+
+/**
+* @brief Destructeur de la classe F_Principale.
+* Supression de l'interface d'édition de la fenêtre.
+*/
+F_Principale::~F_Principale()
+{
+    delete ui;
 }

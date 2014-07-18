@@ -20,7 +20,6 @@
 
 /**
 * @brief Fonction principale du programme.
-*
 * @param argc: nombre d'argument sur la ligne de commande.
 * @param argv: liste des arguments.
 * @return 0 si OK, EXIT_FAILURE sinon
@@ -40,10 +39,32 @@ int main(int argc, char *argv[])
 
 /** @mainpage PEAO
  *
- * Ce logiciel est conçu pour assister une procédure de pesée assistée par ordinateur(PEAO).
+ * Ce logiciel est conçu pour assister une procédure de pesée de contenants chimiques.
  *
  *
- * @section Intro Introduction
+ * @section Introduction
+ *
+ * Le logiciel demande dans un premier temps a l'utilisateur de choisir l'action qu'il
+ * désire effectuer.
+ * Initialisation d'une operation.
+ *
+ * Entrée des informations relatives a la LAS (code process, numéro de lot(LAS)).
+ *
+ * Idem pour les articles(numéro d'article, libelle article),
+ * l'utilsateur peut rentrer autant d'article qu'il souhaite.
+ *
+ * Entrée des lots obligatoirement associés a un article entré précédemment, et précision
+ * du numéro de lot(article).
+ *
+ * Entrée des contenants obligatoirement associés a un lot entré précédemment,
+ * et précision du numero de contenant .
+ * L'utilisateur précisera si il s'agit d'un contenant fractionné ou complet.
+ *
+ * Apres cela l'utilisateur doit imprimmer
+ * les etiquettes de chaque contenant.
+ *
+ * Les etiquettes possederont un code barre.
+ *
  *
  * Description plus complète du logiciel
  *  (sur plusieurs lignes).

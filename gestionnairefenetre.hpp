@@ -44,7 +44,8 @@ private:
 public:
     GestionnaireFenetre(PEAO *ptrPEAO);
     bool bfnAfficherFenetre(unsigned int choixFenetre);
-    PEAO *ptrfnObtenirPointeurPEAO();
+    bool bfnOperationEnCours();
+    void fninitialiserOperation();
     ~GestionnaireFenetre();
 };
 

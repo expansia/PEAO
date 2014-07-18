@@ -19,7 +19,6 @@
 
 /**
  * @brief Constructeur de la classe PEAO.
- *
  * Les attributs de la classe sont initialisées aux valeurs par défaut.
  * Par défaut, aucune opération n'est en cours.
  * Un pointeur vers PEAO est transmis à l'objet
@@ -36,7 +35,6 @@ PEAO::PEAO()
 
 /**
  * @brief Lance la fenêtre principale.
- *
  * Fonction affichant la fenetre principale où l'utilisateur peut
  * choisir l'opération qu'il désire effectuer.
  * @return true si la fenêtre s'est bien lancée, false sinon.
@@ -47,17 +45,10 @@ bool PEAO::bfnLancerProgrammePrincipal()
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Initialisation d'une nouvelle opération de PEAO.
+* L'attribut mb_OperationEnCours est mis a true.
+* La fenetre du formulaire de la LAS est affiché.
 */
-/**
- * @brief PEAO::fninitialiserOperation
- * Fonction permettant d'initialiser une opération de PEAO.
- *
- */
 void PEAO::fninitialiserOperation()
 {
     mb_OperationEnCours=true;
@@ -66,11 +57,9 @@ void PEAO::fninitialiserOperation()
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Fonction d'arret d'une operation en cours.
+* L'attribut mb_OperationEnCours est mis a false.
+* a définir plus tard.
 */
 void PEAO::fnQuitterOperation()
 {
@@ -78,11 +67,9 @@ void PEAO::fnQuitterOperation()
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Fonction determinant si une operation est en cours de traitement.
+* Renvoie la valeur du booleen mb_OperationEnCours.
+* @return true si une operation est en cours de traitement. false sinon.
 */
 bool PEAO::bfnOperationEnCours()
 {
@@ -90,11 +77,7 @@ bool PEAO::bfnOperationEnCours()
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Destructeur de la classe GestionnaireFenetre.
 */
 PEAO::~PEAO()
 {

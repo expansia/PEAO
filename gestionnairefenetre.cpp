@@ -16,18 +16,14 @@
 
 #include "gestionnairefenetre.hpp"
 #include "constantes.hpp"
+#include "peao.hpp"
 
 /**
- * @brief GestionnaireFenetre::GestionnaireFenetre
- * @param ptrPEAO
- */
-
-/**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Constructeur de la classe GestionnaireFenetre.
+* Liaison de l'objet vers PEAO.
+* Création des fenetres accueillant les menus et les formulaires.
+* Envoi d'un pointeur vers l'objet courrant aux fenetres créées.
+* @param ptrPEAO: pointeur vers la classe PEAO.
 */
 GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 {
@@ -40,11 +36,10 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Fonction d'affichage des fenetres du logiciel.
+* En fonction du parametre reçu la fonction va afficher la fenetre correspondante.
+* @param choixFenetre: Un entier determinant la fenetre a afficher.
+* @return false si un probleme est survenu lors de l'affichage. true sinon.
 */
 bool GestionnaireFenetre::bfnAfficherFenetre(unsigned int choixFenetre)
 {
@@ -70,23 +65,27 @@ bool GestionnaireFenetre::bfnAfficherFenetre(unsigned int choixFenetre)
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Appel de la fonction de vérification si une operation est en cours.
+* Appel de la fonction bfnOperationEnCours() par le pointeur mptrMemoPEAO.
+* @return true si une operation est en cours, false sinon.
 */
-PEAO *GestionnaireFenetre::ptrfnObtenirPointeurPEAO()
+bool GestionnaireFenetre::bfnOperationEnCours()
 {
-    return mptrMemoPEAO;
+    return mptrMemoPEAO->bfnOperationEnCours();
 }
 
 /**
-* @brief Description en une ligne de la méthode.
-*
-* @param NomParam1: Description du paramètre 1.
-* @return Description de la valeur de retour
-* @see Pour renvoyer vers une autre définition
+* @brief Appel de la fonction pour démarrer une operation PEAO dans l'objet PEAO.
+* Appel de la fonction fninitialiserOperation() par le pointeur mptrMemoPEAO.
+*/
+void GestionnaireFenetre::fninitialiserOperation()
+{
+    mptrMemoPEAO->fninitialiserOperation();
+}
+
+
+/**
+* @brief Destructeur de la classe GestionnaireFenetre.
 */
 GestionnaireFenetre::~GestionnaireFenetre()
 {
