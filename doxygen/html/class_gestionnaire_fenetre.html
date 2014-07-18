@@ -33,16 +33,21 @@
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#bc983e56a760f623bbf7e2abe4a9613e">GestionnaireFenetre</a> (<a class="el" href="class_p_e_a_o.html">PEAO</a> *ptrPEAO)</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><a class="el" href="class_gestionnaire_fenetre.html#bc983e56a760f623bbf7e2abe4a9613e" title="GestionnaireFenetre::GestionnaireFenetre.">GestionnaireFenetre::GestionnaireFenetre</a>.  <a href="#bc983e56a760f623bbf7e2abe4a9613e"></a><br></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructeur de la classe <a class="el" href="class_gestionnaire_fenetre.html" title="Classe de gestion des fenetres.">GestionnaireFenetre</a>. Liaison de l'objet vers <a class="el" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a>. Création des fenetres accueillant les menus et les formulaires. Envoi d'un pointeur vers l'objet courrant aux fenetres créées.  <a href="#bc983e56a760f623bbf7e2abe4a9613e"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#a71bfc1f191ac9ba3051053834da4d08">bfnAfficherFenetre</a> (unsigned int choixFenetre)</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Description en une ligne de la méthode.  <a href="#a71bfc1f191ac9ba3051053834da4d08"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="class_p_e_a_o.html">PEAO</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#1ad2e0d9b22cc26a4c483c61379f8b71">ptrfnObtenirPointeurPEAO</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fonction d'affichage des fenetres du logiciel. En fonction du parametre reçu la fonction va afficher la fenetre correspondante.  <a href="#a71bfc1f191ac9ba3051053834da4d08"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#2f0d88b26d54ce1c165c39687bbbc5fb">bfnOperationEnCours</a> ()</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Description en une ligne de la méthode.  <a href="#1ad2e0d9b22cc26a4c483c61379f8b71"></a><br></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#04cdddc81dd484dbd85ab0da50868440">~GestionnaireFenetre</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Appel de la fonction de vérification si une operation est en cours. Appel de la fonction <a class="el" href="class_gestionnaire_fenetre.html#2f0d88b26d54ce1c165c39687bbbc5fb" title="Appel de la fonction de vérification si une operation est en cours. Appel de la...">bfnOperationEnCours()</a> par le pointeur mptrMemoPEAO.  <a href="#2f0d88b26d54ce1c165c39687bbbc5fb"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="1bdf4e41a791ceb8ecf1c5bd72a26188"></a><!-- doxytag: member="GestionnaireFenetre::fninitialiserOperation" ref="1bdf4e41a791ceb8ecf1c5bd72a26188" args="()" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#1bdf4e41a791ceb8ecf1c5bd72a26188">fninitialiserOperation</a> ()</td></tr>
 
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Description en une ligne de la méthode.  <a href="#04cdddc81dd484dbd85ab0da50868440"></a><br></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Appel de la fonction pour démarrer une operation <a class="el" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a> dans l'objet <a class="el" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a>. Appel de la fonction <a class="el" href="class_gestionnaire_fenetre.html#1bdf4e41a791ceb8ecf1c5bd72a26188" title="Appel de la fonction pour démarrer une operation PEAO dans l&#39;objet PEAO. Appel...">fninitialiserOperation()</a> par le pointeur mptrMemoPEAO. <br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="04cdddc81dd484dbd85ab0da50868440"></a><!-- doxytag: member="GestionnaireFenetre::~GestionnaireFenetre" ref="04cdddc81dd484dbd85ab0da50868440" args="()" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gestionnaire_fenetre.html#04cdddc81dd484dbd85ab0da50868440">~GestionnaireFenetre</a> ()</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Destructeur de la classe <a class="el" href="class_gestionnaire_fenetre.html" title="Classe de gestion des fenetres.">GestionnaireFenetre</a>. <br></td></tr>
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 Classe de gestion des fenetres. 
@@ -66,44 +71,13 @@ exemple: mGF_gestFenetre-&gt;bfnAfficherFenetre(F_PRINCIPALE); //pour demander �
 <div class="memdoc">
 
 <p>
-<a class="el" href="class_gestionnaire_fenetre.html#bc983e56a760f623bbf7e2abe4a9613e" title="GestionnaireFenetre::GestionnaireFenetre.">GestionnaireFenetre::GestionnaireFenetre</a>. 
+Constructeur de la classe <a class="el" href="class_gestionnaire_fenetre.html" title="Classe de gestion des fenetres.">GestionnaireFenetre</a>. Liaison de l'objet vers <a class="el" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a>. Création des fenetres accueillant les menus et les formulaires. Envoi d'un pointeur vers l'objet courrant aux fenetres créées. 
 <p>
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>ptrPEAO</em>&nbsp;</td><td>Description en une ligne de la méthode. </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>NomParam1,:</em>&nbsp;</td><td>Description du paramètre 1. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ptrPEAO,:</em>&nbsp;</td><td>pointeur vers la classe <a class="el" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a>. </td></tr>
   </table>
 </dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>Description de la valeur de retour </dd></dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd>Pour renvoyer vers une autre définition </dd></dl>
-
-</div>
-</div><p>
-<a class="anchor" name="04cdddc81dd484dbd85ab0da50868440"></a><!-- doxytag: member="GestionnaireFenetre::~GestionnaireFenetre" ref="04cdddc81dd484dbd85ab0da50868440" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">GestionnaireFenetre::~GestionnaireFenetre           </td>
-          <td>(</td>
-          <td class="paramname">          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Description en une ligne de la méthode. 
-<p>
-<dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>NomParam1,:</em>&nbsp;</td><td>Description du paramètre 1. </td></tr>
-  </table>
-</dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>Description de la valeur de retour </dd></dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd>Pour renvoyer vers une autre définition </dd></dl>
 
 </div>
 </div><p>
@@ -125,24 +99,23 @@ Description en une ligne de la méthode.
 <div class="memdoc">
 
 <p>
-Description en une ligne de la méthode. 
+Fonction d'affichage des fenetres du logiciel. En fonction du parametre reçu la fonction va afficher la fenetre correspondante. 
 <p>
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>NomParam1,:</em>&nbsp;</td><td>Description du paramètre 1. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>choixFenetre,:</em>&nbsp;</td><td>Un entier determinant la fenetre a afficher. </td></tr>
   </table>
 </dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>Description de la valeur de retour </dd></dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd>Pour renvoyer vers une autre définition </dd></dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>false si un probleme est survenu lors de l'affichage. true sinon. </dd></dl>
 
 </div>
 </div><p>
-<a class="anchor" name="1ad2e0d9b22cc26a4c483c61379f8b71"></a><!-- doxytag: member="GestionnaireFenetre::ptrfnObtenirPointeurPEAO" ref="1ad2e0d9b22cc26a4c483c61379f8b71" args="()" -->
+<a class="anchor" name="2f0d88b26d54ce1c165c39687bbbc5fb"></a><!-- doxytag: member="GestionnaireFenetre::bfnOperationEnCours" ref="2f0d88b26d54ce1c165c39687bbbc5fb" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_p_e_a_o.html">PEAO</a> * GestionnaireFenetre::ptrfnObtenirPointeurPEAO           </td>
+          <td class="memname">bool GestionnaireFenetre::bfnOperationEnCours           </td>
           <td>(</td>
           <td class="paramname">          </td>
           <td>&nbsp;)&nbsp;</td>
@@ -153,22 +126,16 @@ Description en une ligne de la méthode.
 <div class="memdoc">
 
 <p>
-Description en une ligne de la méthode. 
+Appel de la fonction de vérification si une operation est en cours. Appel de la fonction <a class="el" href="class_gestionnaire_fenetre.html#2f0d88b26d54ce1c165c39687bbbc5fb" title="Appel de la fonction de vérification si une operation est en cours. Appel de la...">bfnOperationEnCours()</a> par le pointeur mptrMemoPEAO. 
 <p>
-<dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>NomParam1,:</em>&nbsp;</td><td>Description du paramètre 1. </td></tr>
-  </table>
-</dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>Description de la valeur de retour </dd></dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd>Pour renvoyer vers une autre définition </dd></dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>true si une operation est en cours, false sinon. </dd></dl>
 
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>D:/Mes Documents/Projet PEAO/CodeQtPEAO/ProjetPEAO/<a class="el" href="gestionnairefenetre_8hpp-source.html">gestionnairefenetre.hpp</a><li>D:/Mes Documents/Projet PEAO/CodeQtPEAO/ProjetPEAO/gestionnairefenetre.cpp</ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Fri Jul 18 08:43:56 2014 for PEAO by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Jul 18 14:27:01 2014 for PEAO by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

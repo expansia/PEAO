@@ -66,16 +66,14 @@ int main(int argc, char *argv[])
  * Les etiquettes possederont un code barre.
  *
  *
- * Description plus complète du logiciel
- *  (sur plusieurs lignes).
  *
- * On fera la liste de ses différentes caractéristiques:
+ * Caractéristiques:
  * 		- carctéristique 1
  * 		- carctéristique 2
  *
  * @section Invoking Exécution
  *
- * Comment faire pour lancer le logiciel et ses différents paramètres.
+ * Le logiciel est en phase de developpement, il se lance donc par le biais de l'IDE Qt Creator
  *
  *
  * @section Configuration Fichier de configuration
@@ -129,30 +127,29 @@ int main(int argc, char *argv[])
  * le programme:
  *
  * - Qt
- * - lib2
- * - lib3
  *
  * incude:
- *   -Iinclude1
- *   -Iinclude2
+ *  #include <QApplication>
  *
  * lib:
- *   -lmalib1
  *
  * @section compilation Compilation
  *
- * Décrire les différentes étapes de compilation du logiciel.
- *
- * The executable file is now in folder src.
+ * Qt Creator linke et compile automatiquement.
  *
  * @section install Installation
  *
- * Décrire la procédure complète d'installation sur un poste ne possédant aucun
- * outils de développement (poste utilisateur).
+ * Voir documentation sur l'installation des outils pour le developpement
+ * sur :"J:\Usine\Projets\PEAO\docs"
+ * Pour récuperer les sources taper la commande suivante sous Git Bash:
+ * "git clone https://github.com/expansia/PEAO.git"
+ * Adresse web du dépot github: "https://github.com/expansia/PEAO"
+ * Ouvrir le projet sous QtCreator en cherchant le fichier "ProjetPEAO.pro", et appuyer
+ * sur Ctrl+R pour compiler et exécuter le programme.
  *
  *
  * @section license Licence
  *
- * Décrire les termes de la licence sous laquelle est distribué le logiciel.
  *
+ * Le logiciel est fourni gratuitement.
  */

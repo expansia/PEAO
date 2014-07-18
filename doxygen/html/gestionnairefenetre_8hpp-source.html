@@ -49,15 +49,16 @@
 <a name="l00042"></a>00042     <a class="code" href="class_f___l_a_s.html" title="Classe contenant le formulaire de création d&amp;#39;une LAS.">F_LAS</a> mfenetreLAS;
 <a name="l00043"></a>00043     <a class="code" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a> *mptrMemoPEAO;
 <a name="l00044"></a>00044 <span class="keyword">public</span>:
-<a name="l00045"></a>00045     <a class="code" href="class_gestionnaire_fenetre.html#bc983e56a760f623bbf7e2abe4a9613e" title="GestionnaireFenetre::GestionnaireFenetre.">GestionnaireFenetre</a>(<a class="code" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a> *ptrPEAO);
-<a name="l00046"></a>00046     <span class="keywordtype">bool</span> <a class="code" href="class_gestionnaire_fenetre.html#a71bfc1f191ac9ba3051053834da4d08" title="Description en une ligne de la méthode.">bfnAfficherFenetre</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> choixFenetre);
-<a name="l00047"></a>00047     <a class="code" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a> *<a class="code" href="class_gestionnaire_fenetre.html#1ad2e0d9b22cc26a4c483c61379f8b71" title="Description en une ligne de la méthode.">ptrfnObtenirPointeurPEAO</a>();
-<a name="l00048"></a>00048     <a class="code" href="class_gestionnaire_fenetre.html#04cdddc81dd484dbd85ab0da50868440" title="Description en une ligne de la méthode.">~GestionnaireFenetre</a>();
-<a name="l00049"></a>00049 };
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051 <span class="preprocessor">#endif // GESTIONNAIREFENETRE_HPP</span>
+<a name="l00045"></a>00045     <a class="code" href="class_gestionnaire_fenetre.html#bc983e56a760f623bbf7e2abe4a9613e" title="Constructeur de la classe GestionnaireFenetre. Liaison de l&amp;#39;objet vers PEAO....">GestionnaireFenetre</a>(<a class="code" href="class_p_e_a_o.html" title="Classe de base du logiciel.">PEAO</a> *ptrPEAO);
+<a name="l00046"></a>00046     <span class="keywordtype">bool</span> <a class="code" href="class_gestionnaire_fenetre.html#a71bfc1f191ac9ba3051053834da4d08" title="Fonction d&amp;#39;affichage des fenetres du logiciel. En fonction du parametre reçu...">bfnAfficherFenetre</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> choixFenetre);
+<a name="l00047"></a>00047     <span class="keywordtype">bool</span> <a class="code" href="class_gestionnaire_fenetre.html#2f0d88b26d54ce1c165c39687bbbc5fb" title="Appel de la fonction de vérification si une operation est en cours. Appel de la...">bfnOperationEnCours</a>();
+<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="class_gestionnaire_fenetre.html#1bdf4e41a791ceb8ecf1c5bd72a26188" title="Appel de la fonction pour démarrer une operation PEAO dans l&amp;#39;objet PEAO. Appel...">fninitialiserOperation</a>();
+<a name="l00049"></a>00049     <a class="code" href="class_gestionnaire_fenetre.html#04cdddc81dd484dbd85ab0da50868440" title="Destructeur de la classe GestionnaireFenetre.">~GestionnaireFenetre</a>();
+<a name="l00050"></a>00050 };
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 <span class="preprocessor">#endif // GESTIONNAIREFENETRE_HPP</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Fri Jul 18 08:43:56 2014 for PEAO by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Jul 18 14:27:01 2014 for PEAO by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>
