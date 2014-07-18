@@ -140,12 +140,33 @@ int main(int argc, char *argv[])
  * @section install Installation
  *
  * Voir documentation sur l'installation des outils pour le developpement
- * sur :"J:\Usine\Projets\PEAO\docs"
+ * sur :
+ * "J:\Usine\Projets\PEAO\docs"
+ *
  * Pour récuperer les sources taper la commande suivante sous Git Bash:
+ *
  * "git clone https://github.com/expansia/PEAO.git"
+ *
  * Adresse web du dépot github: "https://github.com/expansia/PEAO"
- * Ouvrir le projet sous QtCreator en cherchant le fichier "ProjetPEAO.pro", et appuyer
- * sur Ctrl+R pour compiler et exécuter le programme.
+ *
+ * Assurer vous qu'il y est bien les fichiers suivant dans le repertoire de l'executable:
+ * icudt52.dll
+ * icuin52.dll
+ * icuuc52.dll
+ * libgcc_s_dw2-1.dll
+ * libstdc++-6.dll
+ * libwinpthread-1.dll
+ * Qt5Core.dll
+ * Qt5Gui.dll
+ * Qt5Widgets.dll
+ * platforms/qminimal.dll
+ * platforms/qminimald.dll
+ * platforms/qoffscreen.dll
+ * platforms/qoffscreend.dll
+ * platforms/qwindows.dll
+ * platforms/qwindowsd.dll
+ *
+ * Executer ProjetPEAO.exe
  *
  *
  * @section license Licence

@@ -46,6 +46,7 @@ public:
     bool bfnAfficherFenetre(unsigned int choixFenetre);
     bool bfnOperationEnCours();
     void fninitialiserOperation();
+    void fnreceptionnerInformationsLAS(const QString& qsCodeProcess, const QString& qsNumLot);
     ~GestionnaireFenetre();
 };
 

@@ -65,6 +65,18 @@ bool GestionnaireFenetre::bfnAfficherFenetre(unsigned int choixFenetre)
 }
 
 /**
+* @brief Fonction de recuperation des donnees du formulaire de la LAS.
+* La fonction reçoit le code process ainsi que le numero de lot de LAS
+* et les renvoie a l'objet PEAO
+* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+*/
+void GestionnaireFenetre::fnreceptionnerInformationsLAS(const QString& qsCodeProcess, const QString& qsNumLot)
+{
+    mptrMemoPEAO->fnreceptionnerInformationsLAS(qsCodeProcess, qsNumLot);
+}
+
+/**
 * @brief Appel de la fonction de vérification si une operation est en cours.
 * Appel de la fonction bfnOperationEnCours() par le pointeur mptrMemoPEAO.
 * @return true si une operation est en cours, false sinon.

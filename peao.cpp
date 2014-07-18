@@ -77,6 +77,21 @@ bool PEAO::bfnOperationEnCours()
 }
 
 /**
+* @brief Fonction de recuperation des donnees en provenance de l'objet
+* GestionnaireFenetre concernant la LAS.
+* La fonction reçoit le code process ainsi que le numero de lot de LAS
+* et s'en sert pour instancier un nouvel objet LAS.
+* Il ne peut y avoir qu'une seule LAS instanciee.
+* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+*/
+void PEAO::fnreceptionnerInformationsLAS(const QString& qsCodeProcess,const QString& qsNumLot)
+{
+
+}
+
+
+/**
 * @brief Destructeur de la classe GestionnaireFenetre.
 */
 PEAO::~PEAO()

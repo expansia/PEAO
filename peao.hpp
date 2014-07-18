@@ -44,6 +44,7 @@ public:
     void fninitialiserOperation();
     void fnQuitterOperation();
     bool bfnOperationEnCours();
+    void fnreceptionnerInformationsLAS(const QString& qsCodeProcess,const QString& qsNumLot);
     ~PEAO();
 };
 

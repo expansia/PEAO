@@ -18,6 +18,7 @@
 #include "f_las.hpp"
 #include "ui_f_las.h"
 #include <QMessageBox>
+#include "gestionnairefenetre.hpp"
 
 /**
 * @brief Constructeur de la classe F_LAS.
@@ -71,6 +72,8 @@ void F_LAS::on_buttonBox_accepted()
     }
         QMessageBox::information(this, "Formulaire LAS", textAAfficher);
         //affichage de la fenêtre
+        mptrGestionnaireFenetre->fnreceptionnerInformationsLAS(
+                     receptCodeProcess,  receptNumeroDeLot);
 
 }
 
