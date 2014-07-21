@@ -14,7 +14,6 @@
  *   Options d'édition de liens :                                             *
  ******************************************************************************/
 
-#include "f_las.hpp"
 #include "peao.hpp"
 #include <QApplication>
 
