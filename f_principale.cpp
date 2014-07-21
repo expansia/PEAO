@@ -14,6 +14,7 @@
  *   Options d'édition de liens :                                             *
  ******************************************************************************/
 
+#include "constantes.hpp"
 #include "f_principale.hpp"
 #include "gestionnairefenetre.hpp"
 #include "ui_f_principale.h"
@@ -74,6 +75,21 @@ void F_Principale::fnEcrireInformationsLAS(
 }
 
 /**
+* @brief Affichage des informations du nouvel article dans la fenetre principalle.
+*
+* @param numArticle: Numero d'article.
+* @param libArticle: Libelle de l'article.
+*/
+void F_Principale::fnEcrireInformationsNouvelArticle(
+        const std::string &numArticle, const std::string &libArticle)
+{
+
+    std::string strBase =  "Numero Article : " + numArticle +
+            "    Libelle de l'article' : " + libArticle;
+    ui->lbArticle1->setText( QString( strBase.c_str() ) );
+}
+
+/**
 * @brief Reception du signal du bouton pour stopper une opération LAS.
 * (à définir plus tard)
 */
@@ -84,12 +100,20 @@ void F_Principale::on_btnQuitterOperation_clicked()
 
 /**
 * @brief Reception du signal du bouton pour ajouter un article.
+* Verification qu'une operation est bien en cours,
+* et demande d'affichage du formulaire de l'article.
 */
 void F_Principale::on_btAjoutArticle_clicked()
 {
+    //si operation en cours
     if( mptrGestionnaireFenetre->bfnOperationEnCours() )
     {
-
+       mptrGestionnaireFenetre->bfnAfficherFenetre( F_FORM_ARTICLE );
+    }
+    else
+    {
+        QMessageBox::information(this, "Impossible d'ajouter un nouvel article",
+                                 "L'operation n'est pas initialisee");
     }
 }
 

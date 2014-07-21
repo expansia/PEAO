@@ -21,6 +21,7 @@
 
 class F_LAS;
 class F_Principale;
+class F_Article;
 class PEAO;
 
 /**
@@ -41,14 +42,17 @@ class GestionnaireFenetre
 private:
     F_Principale *mfenetrePrincipale;
     F_LAS *mfenetreLAS;
+    F_Article *mfenetreArticle;
     PEAO *mptrMemoPEAO;
 public:
     GestionnaireFenetre(PEAO *ptrPEAO);
     bool bfnAfficherFenetre( const unsigned int &choixFenetre );
     bool bfnOperationEnCours();
     void fnInitialiserOperation();
-    bool fnReceptionnerInformationsLAS( const std::string &qsCodeProcess,
+    void fnReceptionnerInformationsCreationLAS( const std::string &qsCodeProcess,
                                         const std::string &qsNumLot );
+    void fnReceptionnerInformationsCreationArticle(
+            const std::string &qsNumArticle, const std::string &qsLibArticle);
     ~GestionnaireFenetre();
 };
 

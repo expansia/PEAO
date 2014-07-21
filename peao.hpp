@@ -48,7 +48,9 @@ public:
     void fnInitialiserOperation();
     void fnQuitterOperation();
     bool bfnOperationEnCours();
-    bool fnReceptionnerInformationsLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
+    bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
+    bool fnReceptionnerInformationsCreationArticle(
+            const std::string& qsNumArt,const std::string& qsLibArt);
     ~PEAO();
 };
 

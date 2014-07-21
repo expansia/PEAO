@@ -17,14 +17,19 @@ SOURCES += main.cpp\
     f_las.cpp \
     peao.cpp \
     gestionnairefenetre.cpp \
-    las.cpp
+    las.cpp \
+    f_article.cpp \
+    article.cpp
 
 HEADERS  += f_principale.hpp \
     f_las.hpp \
     peao.hpp \
     gestionnairefenetre.hpp \
     constantes.hpp \
-    las.hpp
+    las.hpp \
+    f_article.hpp \
+    article.hpp
 
 FORMS    += f_principale.ui \
-    f_las.ui
+    f_las.ui \
+    f_article.ui

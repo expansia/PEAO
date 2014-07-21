@@ -89,12 +89,41 @@ bool PEAO::bfnOperationEnCours()
 * Il ne peut y avoir qu'une seule LAS instanciee.
 * @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @return false si l'objet Las n'a pas pu etre instancié, true sinon.
 */
-bool PEAO::fnReceptionnerInformationsLAS(
+bool PEAO::fnReceptionnerInformationsCreationLAS(
         const std::string& qsCodeProcess,const std::string& qsNumLot)
 {
     mLas = new Las(qsCodeProcess, qsNumLot);
     return NULL != mLas;
+}
+
+
+/**
+* @brief Fonction de recuperation des donnees en provenance de l'objet
+* GestionnaireFenetre concernant un article.
+* La fonction reçoit le numero d'article ainsi que le libelle de l'article
+* et l'envoi a l'objet Las.
+* @param qsNumArt: Le numero d'article en provenance du formulaire de l'article.
+* @param qsLibArt: Le libelle de en provenance du formulaire de l'article.
+* @return false si l'objet Article n'a pas pu etre instancié, true sinon.
+*/
+bool PEAO::fnReceptionnerInformationsCreationArticle(
+        const std::string& qsNumArt,const std::string& qsLibArt)
+{
+    //A modifier
+    bool retour = false;
+    if( NULL == mLas )
+    {
+        retour = false;
+    }
+    else
+    {
+        retour = mLas->fnCreerArticle(qsNumArt, qsLibArt);
+    }
+    return retour;
+    //mLas = new Las(qsCodeProcess, qsNumLot);
+    //return NULL != mLas;
 }
 
 

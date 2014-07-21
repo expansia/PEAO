@@ -47,6 +47,8 @@ public:
     explicit F_Principale(QWidget *parent = 0);
     void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
     void fnEcrireInformationsLAS(const std::string &codeProcess, const std::string &numeroDeLot);
+    void fnEcrireInformationsNouvelArticle(
+            const std::string &numArticle, const std::string &libArticle);
     ~F_Principale();
 
 private slots:

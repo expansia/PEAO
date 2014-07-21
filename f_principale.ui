@@ -144,10 +144,49 @@
      <string>Ajout Article</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QPushButton" name="btnQuitterOperation">
     <property name="geometry">
      <rect>
       <x>300</x>
+      <y>310</y>
+      <width>119</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Quitter opération</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Articles:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbArticle1">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>90</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>--</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
       <y>50</y>
       <width>121</width>
       <height>81</height>
@@ -158,13 +197,6 @@
       <widget class="QPushButton" name="btnInitialiserOperation">
        <property name="text">
         <string>Initialiser opération</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnQuitterOperation">
-       <property name="text">
-        <string>Quitter opération</string>
        </property>
       </widget>
      </item>
@@ -183,6 +215,9 @@
    <zorder>line_5</zorder>
    <zorder>label_2</zorder>
    <zorder>btAjoutArticle</zorder>
+   <zorder>btnQuitterOperation</zorder>
+   <zorder>label_3</zorder>
+   <zorder>lbArticle1</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -65,15 +65,17 @@ void F_LAS::on_buttonBox_accepted()
     {
         textAAfficher+="Erreur: code process non entré";
     }
-    if(textAAfficher.size() == 0)//si aucun message d'erreur
+    if(textAAfficher.size() != 0)//si message d'erreur
     {
         //Entré de la valeur des champs entrés dans la chaine
-        textAAfficher += "Code process : "+receptCodeProcess +
-                "\nNuméro de lot : " + receptNumeroDeLot;
-    }
+        //textAAfficher += "Code process : "+receptCodeProcess +
+          //      "\nNuméro de lot : " + receptNumeroDeLot;
         QMessageBox::information(this, "Formulaire LAS", textAAfficher);
+        //fenetre pour signaler l'erreur
+        return;
+    }
         //affichage de la fenêtre
-        mptrGestionnaireFenetre->fnReceptionnerInformationsLAS(
+        mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLAS(
                      receptCodeProcess.toStdString(),  receptNumeroDeLot.toStdString() );
 
 }
