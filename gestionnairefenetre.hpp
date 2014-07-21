@@ -17,9 +17,10 @@
 #ifndef GESTIONNAIREFENETRE_HPP
 #define GESTIONNAIREFENETRE_HPP
 
-#include "f_las.hpp"
-#include "f_principale.hpp"
+#include <string>
 
+class F_LAS;
+class F_Principale;
 class PEAO;
 
 /**
@@ -38,15 +39,16 @@ class PEAO;
 class GestionnaireFenetre
 {
 private:
-    F_Principale mfenetrePrincipale;
-    F_LAS mfenetreLAS;
+    F_Principale *mfenetrePrincipale;
+    F_LAS *mfenetreLAS;
     PEAO *mptrMemoPEAO;
 public:
     GestionnaireFenetre(PEAO *ptrPEAO);
-    bool bfnAfficherFenetre(unsigned int choixFenetre);
+    bool bfnAfficherFenetre( const unsigned int &choixFenetre );
     bool bfnOperationEnCours();
-    void fninitialiserOperation();
-    void fnreceptionnerInformationsLAS(const QString& qsCodeProcess, const QString& qsNumLot);
+    void fnInitialiserOperation();
+    bool fnReceptionnerInformationsLAS( const std::string &qsCodeProcess,
+                                        const std::string &qsNumLot );
     ~GestionnaireFenetre();
 };
 

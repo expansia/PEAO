@@ -46,12 +46,15 @@ class F_Principale : public QMainWindow
 public:
     explicit F_Principale(QWidget *parent = 0);
     void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
+    void fnEcrireInformationsLAS(const std::string &codeProcess, const std::string &numeroDeLot);
     ~F_Principale();
 
 private slots:
-    void on_boutonCommencerLAS_clicked();
 
-    void on_boutonCommencerLAS_2_clicked();
+    void on_btnInitialiserOperation_clicked();
+    void on_btnQuitterOperation_clicked();
+
+    void on_btAjoutArticle_clicked();
 
 private:
     GestionnaireFenetre *mptrGestionnaireFenetre;

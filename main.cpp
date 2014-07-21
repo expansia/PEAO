@@ -39,30 +39,35 @@ int main(int argc, char *argv[])
 /** @mainpage PEAO
  *
  * Ce logiciel est conçu pour assister une procédure de pesée de contenants chimiques.
- *
+ * Les fonctions nécessaires sont les suivantes:
+ * -Receptions des données de la LAS.
+ * -Impression des étiquettes.
+ * -Reception des données d'une balance.
+ * -Impression des comptes rendus.
+ * -Mémorisation des opérations sur un serveur.
  *
  * @section Introduction
  *
  * Le logiciel demande dans un premier temps a l'utilisateur de choisir l'action qu'il
  * désire effectuer.
- * Initialisation d'une operation.
+ * Initialisation d'une opération.
  *
- * Entrée des informations relatives a la LAS (code process, numéro de lot(LAS)).
+ * Entrée des informations relatives à la LAS (code process, numéro de lot(LAS)).
  *
  * Idem pour les articles(numéro d'article, libelle article),
- * l'utilsateur peut rentrer autant d'article qu'il souhaite.
+ * l'utilsateur peut rentrer autant d'articles qu'il souhaite.
  *
- * Entrée des lots obligatoirement associés a un article entré précédemment, et précision
+ * Entrées des lots obligatoirement associées a un article entré précédemment, et précision
  * du numéro de lot(article).
  *
  * Entrée des contenants obligatoirement associés a un lot entré précédemment,
- * et précision du numero de contenant .
+ * et précision du numéro de contenant .
  * L'utilisateur précisera si il s'agit d'un contenant fractionné ou complet.
  *
  * Apres cela l'utilisateur doit imprimmer
- * les etiquettes de chaque contenant.
+ * les étiquettes de chaque contenant.
  *
- * Les etiquettes possederont un code barre.
+ * Les étiquettes possèderont un code barre.
  *
  *
  *
@@ -72,8 +77,8 @@ int main(int argc, char *argv[])
  *
  * @section Invoking Exécution
  *
- * Le logiciel est en phase de developpement, il se lance donc par le biais de l'IDE Qt Creator
- *
+ * Le logiciel est en phase de développement, il se lance donc par le biais de l'IDE Qt Creator
+ * Exécuter ProjetPEAO.exe
  *
  * @section Configuration Fichier de configuration
  *
@@ -138,7 +143,7 @@ int main(int argc, char *argv[])
  *
  * @section install Installation
  *
- * Voir documentation sur l'installation des outils pour le developpement
+ * Voir documentation sur l'installation des outils pour le développement
  * sur :
  * "J:\Usine\Projets\PEAO\docs"
  *
@@ -148,7 +153,7 @@ int main(int argc, char *argv[])
  *
  * Adresse web du dépot github: "https://github.com/expansia/PEAO"
  *
- * Assurer vous qu'il y est bien les fichiers suivant dans le repertoire de l'executable:
+ * Assurez vous qu'il y est bien les fichiers suivant dans le répertoire de l'exécutable:
  * icudt52.dll
  * icuin52.dll
  * icuuc52.dll
@@ -165,7 +170,7 @@ int main(int argc, char *argv[])
  * platforms/qwindows.dll
  * platforms/qwindowsd.dll
  *
- * Executer ProjetPEAO.exe
+ * Executer PEAO.exe
  *
  *
  * @section license Licence

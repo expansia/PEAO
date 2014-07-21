@@ -16,6 +16,8 @@
 
 #include "peao.hpp"
 #include "constantes.hpp"
+#include "las.hpp"
+#include "gestionnairefenetre.hpp"
 
 /**
  * @brief Constructeur de la classe PEAO.
@@ -28,8 +30,10 @@
  */
 PEAO::PEAO()
 {
+    mGF_gestFenetre     = NULL;
     mb_OperationEnCours = false;
     mGF_gestFenetre     = new GestionnaireFenetre(this);
+    mLas                = NULL;
 }
 
 
@@ -49,9 +53,10 @@ bool PEAO::bfnLancerProgrammePrincipal()
 * L'attribut mb_OperationEnCours est mis a true.
 * La fenetre du formulaire de la LAS est affiché.
 */
-void PEAO::fninitialiserOperation()
+void PEAO::fnInitialiserOperation()
 {
     mb_OperationEnCours=true;
+
     mGF_gestFenetre->bfnAfficherFenetre(F_FORM_LAS);
 
 }
@@ -85,15 +90,20 @@ bool PEAO::bfnOperationEnCours()
 * @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
-void PEAO::fnreceptionnerInformationsLAS(const QString& qsCodeProcess,const QString& qsNumLot)
+bool PEAO::fnReceptionnerInformationsLAS(
+        const std::string& qsCodeProcess,const std::string& qsNumLot)
 {
-
+    mLas = new Las(qsCodeProcess, qsNumLot);
+    return NULL != mLas;
 }
 
 
 /**
 * @brief Destructeur de la classe GestionnaireFenetre.
+* Destruction des objets alloues dynamiquement(mLas, mGF_gestFenetre)
 */
 PEAO::~PEAO()
 {
+    if( NULL != mLas )delete mLas;
+    if( NULL != mGF_gestFenetre )delete mGF_gestFenetre;
 }

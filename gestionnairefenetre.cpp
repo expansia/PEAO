@@ -15,6 +15,8 @@
  ******************************************************************************/
 
 #include "gestionnairefenetre.hpp"
+#include "f_principale.hpp"
+#include "f_las.hpp"
 #include "constantes.hpp"
 #include "peao.hpp"
 
@@ -27,12 +29,14 @@
 */
 GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 {
+    mfenetreLAS = new F_LAS();
+    mfenetrePrincipale = new F_Principale();
     //mémorisation du pointeur vers l'objet PEAO
-    mptrMemoPEAO=ptrPEAO;
+    mptrMemoPEAO = ptrPEAO;
     /*envoie d'un pointeur de l'objet courant(GestionnaireFenetre)
     vers les classes fenetre*/
-    mfenetrePrincipale.fnMemoPtrGestionnaireFenetre(this);
-    mfenetreLAS.fnMemoPtrGestionnaireFenetre(this);
+    mfenetrePrincipale->fnMemoPtrGestionnaireFenetre( this );
+    mfenetreLAS->fnMemoPtrGestionnaireFenetre( this );
 }
 
 /**
@@ -41,15 +45,15 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 * @param choixFenetre: Un entier determinant la fenetre a afficher.
 * @return false si un probleme est survenu lors de l'affichage. true sinon.
 */
-bool GestionnaireFenetre::bfnAfficherFenetre(unsigned int choixFenetre)
+bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
 {
     switch(choixFenetre)
     {
     case F_PRINCIPALE:
-        mfenetrePrincipale.show();
+        mfenetrePrincipale->show();
         break;
     case F_FORM_LAS:
-        mfenetreLAS.show();
+        mfenetreLAS->show();
         break;
     case F_FORM_CONTENANT:
         break;
@@ -71,9 +75,17 @@ bool GestionnaireFenetre::bfnAfficherFenetre(unsigned int choixFenetre)
 * @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
-void GestionnaireFenetre::fnreceptionnerInformationsLAS(const QString& qsCodeProcess, const QString& qsNumLot)
+bool GestionnaireFenetre::fnReceptionnerInformationsLAS(
+        const std::string &qsCodeProcess, const std::string &qsNumLot)
 {
-    mptrMemoPEAO->fnreceptionnerInformationsLAS(qsCodeProcess, qsNumLot);
+    //verification si l'objet Las a bien ete instancie
+    if( mptrMemoPEAO->fnReceptionnerInformationsLAS(
+                qsCodeProcess, qsNumLot ) )
+    {
+         mfenetrePrincipale->fnEcrireInformationsLAS(qsCodeProcess, qsNumLot);
+         return true;
+    }
+    return false;
 }
 
 /**
@@ -90,9 +102,9 @@ bool GestionnaireFenetre::bfnOperationEnCours()
 * @brief Appel de la fonction pour démarrer une operation PEAO dans l'objet PEAO.
 * Appel de la fonction fninitialiserOperation() par le pointeur mptrMemoPEAO.
 */
-void GestionnaireFenetre::fninitialiserOperation()
+void GestionnaireFenetre::fnInitialiserOperation()
 {
-    mptrMemoPEAO->fninitialiserOperation();
+    mptrMemoPEAO->fnInitialiserOperation();
 }
 
 
@@ -101,5 +113,6 @@ void GestionnaireFenetre::fninitialiserOperation()
 */
 GestionnaireFenetre::~GestionnaireFenetre()
 {
-
+    delete mfenetrePrincipale;
+    delete mfenetreLAS;
 }

@@ -67,7 +67,7 @@
     <string>Numéro de lot::</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="EntreCodeProcess">
+  <widget class="QLineEdit" name="leCodeProcess">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -77,7 +77,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="EntreNumLot">
+  <widget class="QLineEdit" name="leNumLot">
    <property name="geometry">
     <rect>
      <x>180</x>

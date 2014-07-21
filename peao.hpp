@@ -17,7 +17,10 @@
 #ifndef PEAO_HPP
 #define PEAO_HPP
 
-#include "gestionnairefenetre.hpp"
+#include <string>
+
+class GestionnaireFenetre;
+class Las;
 
 /**
  * @class PEAO
@@ -38,13 +41,14 @@ class PEAO
 private:
     bool mb_OperationEnCours;
     GestionnaireFenetre *mGF_gestFenetre;
+    Las *mLas;
 public:
     PEAO();
     bool bfnLancerProgrammePrincipal();
-    void fninitialiserOperation();
+    void fnInitialiserOperation();
     void fnQuitterOperation();
     bool bfnOperationEnCours();
-    void fnreceptionnerInformationsLAS(const QString& qsCodeProcess,const QString& qsNumLot);
+    bool fnReceptionnerInformationsLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
     ~PEAO();
 };
 
