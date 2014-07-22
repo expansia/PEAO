@@ -31,9 +31,10 @@ F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale)
 {
+    muiNombreLot=0;
     mptrGestionnaireFenetre=NULL;
     muiNombreArticle=0;
-    ui->setupUi(this);
+    if( ui )ui->setupUi(this);
 }
 
 /**
@@ -54,14 +55,14 @@ void F_Principale::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 void F_Principale::on_btnInitialiserOperation_clicked()
 {
     //si une opération est déja en cours
-   if( mptrGestionnaireFenetre->bfnOperationEnCours() )
+   if( mptrGestionnaireFenetre && mptrGestionnaireFenetre->bfnOperationEnCours() )
    {
        QMessageBox::information(this, "Impossible de demarrer une nouvelle operation",
                                 "Une operation est deja en cours de traitement");
        return;
    }
-    mptrGestionnaireFenetre->fnInitialiserOperation();
-    ui->lbOperationEnCours->setText( "Operation en cours" );
+    if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnInitialiserOperation();
+    if( ui && ui-> lbOperationEnCours )ui->lbOperationEnCours->setText( "Operation en cours" );
 }
 
 /**
@@ -74,7 +75,7 @@ void F_Principale::fnEcrireInformationsLAS(
         const std::string &codeProcess, const std::string &numeroDeLot)
 {
     std::string strBase = "Code process : " + codeProcess + "    Numero de lot : " + numeroDeLot;
-    ui->infoLAS->setText( QString( strBase.c_str() ) );
+    if( ui && ui-> infoLAS )ui->infoLAS->setText( QString( strBase.c_str() ) );
 }
 
 /**
@@ -93,20 +94,52 @@ void F_Principale::fnEcrireInformationsNouvelArticle(
     switch( muiNombreArticle % 3 )
     {
     case 0:
-        ui->lbArticle1->setText( QString( strBase.c_str() ) );
+        if( ui && ui->lbArticle1 )ui->lbArticle1->setText( QString( strBase.c_str() ) );
         break;
 
     case 1:
-        ui->lbArticle2->setText( QString( strBase.c_str() ) );
+        if( ui && ui->lbArticle2 )ui->lbArticle2->setText( QString( strBase.c_str() ) );
         break;
 
     case 2:
-        ui->lbArticle3->setText( QString( strBase.c_str() ) );
+        if( ui && ui->lbArticle3 )ui->lbArticle3->setText( QString( strBase.c_str() ) );
         break;
     default:
         break;
      }
     muiNombreArticle++;
+}
+
+/**
+* @brief Affichage des informations du nouveau lot dans la fenetre principalle.
+*
+* @param numArticle: Numero d'article.
+* @param libArticle: Libelle de l'article.
+*/
+void F_Principale::fnEcrireInformationsLot(
+        const std::string &sChoixArticle, const std::string &sNumeroLot)
+{
+    std::string strBase =  "Libelle Article : " + sChoixArticle +
+            "    Numero de lot' : " + sNumeroLot;
+    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
+    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
+    switch( muiNombreLot % 3 )
+    {
+    case 0:
+       if( ui && ui->lbLot1  ) ui->lbLot1->setText( QString( strBase.c_str() ) );
+        break;
+
+    case 1:
+        if( ui && ui->lbLot2 )ui->lbLot2->setText( QString( strBase.c_str() ) );
+        break;
+
+    case 2:
+        if( ui && ui->lbLot3 )ui->lbLot3->setText( QString( strBase.c_str() ) );
+        break;
+    default:
+        break;
+     }
+    muiNombreLot++;
 }
 
 /**
@@ -126,9 +159,9 @@ void F_Principale::on_btnQuitterOperation_clicked()
 void F_Principale::on_btAjoutArticle_clicked()
 {
     //si operation en cours
-    if( mptrGestionnaireFenetre->bfnOperationEnCours() )
+    if( mptrGestionnaireFenetre && mptrGestionnaireFenetre->bfnOperationEnCours() )
     {
-       mptrGestionnaireFenetre->bfnAfficherFenetre( F_FORM_ARTICLE );
+       if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->bfnAfficherFenetre( F_FORM_ARTICLE );
     }
     else
     {
@@ -143,7 +176,7 @@ void F_Principale::on_btAjoutArticle_clicked()
 */
 void F_Principale::on_btAjoutLot_clicked()
 {
-    if( false == mptrGestionnaireFenetre->fnDemandeAjoutLot() )
+    if(  mptrGestionnaireFenetre && false == mptrGestionnaireFenetre->fnDemandeAjoutLot() )
     {
         QMessageBox::information(this, "Impossible d'ajouter un nouveau lot",
                                  "Veuillez entrer au moins 1 article.");

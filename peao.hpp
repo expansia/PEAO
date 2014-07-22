@@ -52,6 +52,8 @@ public:
     bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
     bool fnReceptionnerInformationsCreationArticle(
     const std::string& qsNumArt,const std::string& qsLibArt);
+    bool bfnReceptionnerInformationsCreationLot(
+            const std::string &sChoixArticle, const std::string &sNumeroLot);
     const std::list<std::string> *lstfnRetourListeLibelle()const;
     ~PEAO();
 };

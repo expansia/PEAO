@@ -30,7 +30,7 @@ F_LAS::F_LAS(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::F_LAS)
 {
-    ui->setupUi(this);
+    if( ui )ui->setupUi(this);
 }
 
 /**
@@ -52,9 +52,9 @@ void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 void F_LAS::on_btValider_clicked()
 {
     QString textAAfficher="", receptNumeroDeLot, receptCodeProcess;
-    receptNumeroDeLot = ui->leNumLot->text();
+    if( ui && ui->leNumLot )receptNumeroDeLot = ui->leNumLot->text();
     //recuperation du numéro de lot du formulaire
-    receptCodeProcess = ui->leCodeProcess->text();
+    if( ui && ui->leCodeProcess )receptCodeProcess = ui->leCodeProcess->text();
     //recuperation du code process du formulaire
     if(receptNumeroDeLot.size() == 0)//si champ numéro de lot vide
     {
@@ -68,14 +68,12 @@ void F_LAS::on_btValider_clicked()
     if(textAAfficher.size() != 0)//si message d'erreur
     {
         //Entré de la valeur des champs entrés dans la chaine
-        //textAAfficher += "Code process : "+receptCodeProcess +
-          //      "\nNuméro de lot : " + receptNumeroDeLot;
         QMessageBox::information(this, "Formulaire LAS", textAAfficher);
         //fenetre pour signaler l'erreur
         return;
     }
         //affichage de la fenêtre
-        mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLAS(
+        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLAS(
                      receptCodeProcess.toStdString(),  receptNumeroDeLot.toStdString() );
         close();
 }

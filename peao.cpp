@@ -45,7 +45,8 @@ PEAO::PEAO()
  */
 bool PEAO::bfnLancerProgrammePrincipal()
 {
-     return mGF_gestFenetre->bfnAfficherFenetre(F_PRINCIPALE);
+     if( mGF_gestFenetre )return mGF_gestFenetre->bfnAfficherFenetre(F_PRINCIPALE);
+     return false;
 }
 
 /**
@@ -57,7 +58,7 @@ void PEAO::fnInitialiserOperation()
 {
     mb_OperationEnCours=true;
 
-    mGF_gestFenetre->bfnAfficherFenetre(F_FORM_LAS);
+    if( mGF_gestFenetre )mGF_gestFenetre->bfnAfficherFenetre(F_FORM_LAS);
 
 }
 
@@ -102,6 +103,23 @@ bool PEAO::fnReceptionnerInformationsCreationLAS(
 
 /**
 * @brief Fonction de recuperation des donnees en provenance de l'objet
+* GestionnaireFenetre concernant un Lot.
+* La fonction reçoit le choix de l'article ainsi que le numero de lot article
+* et les transferre a la LAS.
+* @param sChoixArticle: Le choix de l'article en provenance du formulaire du Lot.
+* @param sNumeroLot: Le numero de lot en provenance du formulaire du Lot.
+* @return false si l'objet Lot n'a pas pu etre instancié, true sinon.
+*/
+bool PEAO::bfnReceptionnerInformationsCreationLot(
+        const std::string &sChoixArticle, const std::string &sNumeroLot)
+{
+    if( mLas )return mLas -> bfnReceptionnerInformationsCreationLot(sChoixArticle, sNumeroLot);
+    return false;
+}
+
+
+/**
+* @brief Fonction de recuperation des donnees en provenance de l'objet
 * GestionnaireFenetre concernant un article.
 * La fonction reçoit le numero d'article ainsi que le libelle de l'article
 * et l'envoi a l'objet Las.
@@ -120,7 +138,8 @@ bool PEAO::fnReceptionnerInformationsCreationArticle(
     }
     else
     {
-        retour = mLas->fnCreerArticle(qsNumArt, qsLibArt);
+        if( mLas )retour = mLas->fnCreerArticle(qsNumArt, qsLibArt);
+        retour = false;
     }
     return retour;
     //mLas = new Las(qsCodeProcess, qsNumLot);
@@ -137,7 +156,8 @@ const std::list<std::string> *PEAO::lstfnRetourListeLibelle()const
     {
         return NULL;
     }
-    return mLas->fnRetourListeLibelle();
+    if( mLas )return mLas->fnRetourListeLibelle();
+    return NULL;
 }
 
 /**

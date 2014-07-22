@@ -46,7 +46,7 @@ class F_Principale : public QMainWindow
     Q_OBJECT
 private:
     //std::list<std::string> lstLibelleArticle;
-    unsigned int muiNombreArticle;
+    unsigned int muiNombreArticle, muiNombreLot; //TMP
     GestionnaireFenetre *mptrGestionnaireFenetre;
     Ui::F_Principale *ui;
 
@@ -54,6 +54,8 @@ public:
     explicit F_Principale(QWidget *parent = 0);
     void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
     void fnEcrireInformationsLAS(const std::string &codeProcess, const std::string &numeroDeLot);
+    void fnEcrireInformationsLot(
+            const std::string &sChoixArticle, const std::string &sNumeroLot);
     void fnEcrireInformationsNouvelArticle(
     const std::string &numArticle, const std::string &libArticle);
     ~F_Principale();

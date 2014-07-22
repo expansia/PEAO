@@ -54,6 +54,8 @@ public:
     bool fnDemandeAjoutLot();
     void fnReceptionnerInformationsCreationLAS( const std::string &qsCodeProcess,
                                         const std::string &qsNumLot );
+    void fnReceptionnerInformationsCreationLot(
+            const std::string &sChoixArt, const std::string &sNumLot);
     void fnReceptionnerInformationsCreationArticle(
             const std::string &qsNumArticle, const std::string &qsLibArticle);
     ~GestionnaireFenetre();

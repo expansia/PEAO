@@ -14,7 +14,7 @@ F_Article::F_Article(QWidget *parent) :
     ui(new Ui::F_Article)
 {
     mptrGestionnaireFenetre=NULL;
-    ui->setupUi(this);
+    if( ui )ui->setupUi(this);
 }
 
 
@@ -28,9 +28,9 @@ F_Article::F_Article(QWidget *parent) :
 void F_Article::on_btValiderArt_clicked()
 {
     QString textErreur="", receptNumeroArticle, receptLibelleArticle;
-    receptNumeroArticle = ui->leNumArt->text();
+    if( ui && ui->leNumArt )receptNumeroArticle = ui->leNumArt->text();
     //recuperation du numéro d'e lot'article du formulaire
-    receptLibelleArticle = ui->leLibArt->text();
+    if( ui && ui->leLibArt )receptLibelleArticle = ui->leLibArt->text();
     //recuperation du libelle de l'article du formulaire
     if(receptNumeroArticle.size() == 0)//si champ numéro de lot vide
     {
@@ -47,7 +47,7 @@ void F_Article::on_btValiderArt_clicked()
         //fenetre pour signaler l'erreur
         return;
     }
-        mptrGestionnaireFenetre->fnReceptionnerInformationsCreationArticle(
+        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationArticle(
                         receptNumeroArticle.toStdString(),  receptLibelleArticle.toStdString() );
 
         close();

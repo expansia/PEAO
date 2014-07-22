@@ -2,17 +2,24 @@
 #define ARTICLE_HPP
 
 #include <string>
+#include <list>
+
+class Lot;
 
 class Article
 {
 private:
-    std::string stNumeroArticle, stLibelleArticle;
-    inline std::string fnLireNumArticle() const {return stNumeroArticle;}
-    inline std::string fnLireLibelleArticle() const {return stLibelleArticle;}
-    inline void fnChangerNumArticle(const std::string &numArt){stNumeroArticle = numArt;}
-    inline void fnChangerLibelleArticle(const std::string &libArt){stLibelleArticle = libArt;}
+    std::list<Lot*> mlstLot;
+    std::string mstNumeroArticle, mstLibelleArticle;
+
 public:
     Article(const std::string& qsNumArt,const std::string& qsLibArt);
+    inline std::string fnLireNumArticle() const {return mstNumeroArticle;}
+    inline std::string fnLireLibelleArticle() const {return mstLibelleArticle;}
+    inline void fnChangerNumArticle(const std::string &numArt){mstNumeroArticle = numArt;}
+    inline void fnChangerLibelleArticle(const std::string &libArt){mstLibelleArticle = libArt;}
+    bool bfnCreerLot(const std::string &sNumLot);
+    void fnViderListeLot();
     ~Article();
 };
 

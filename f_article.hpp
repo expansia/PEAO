@@ -12,7 +12,9 @@ class F_Article;
 class F_Article : public QDialog
 {
     Q_OBJECT
-
+private:
+    Ui::F_Article *ui;
+    GestionnaireFenetre *mptrGestionnaireFenetre;
 public:
     explicit F_Article(QWidget *parent = 0);
     void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
@@ -23,9 +25,6 @@ private slots:
 
     void on_btAnnulerArt_clicked();
 
-private:
-    Ui::F_Article *ui;
-    GestionnaireFenetre *mptrGestionnaireFenetre;
 };
 
 #endif // F_ARTICLE_HPP

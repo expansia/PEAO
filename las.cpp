@@ -9,8 +9,8 @@
 */
 Las::Las(const std::string &qsCodeProcess, const std::string &qsNumLot)
 {
-    mqsCodeProcess = qsCodeProcess;
-    mqsNumeroDeLot = qsNumLot;
+    msCodeProcess = qsCodeProcess;
+    msNumeroDeLot = qsNumLot;
 }
 
 /**
@@ -23,10 +23,10 @@ Las::Las(const std::string &qsCodeProcess, const std::string &qsNumLot)
 bool Las::fnCreerArticle(const std::string &qsNumArticle, const std::string &qsLibArticle)
 {
     //instanciation de l'article avec les parametres
-    lstLibelle.push_back( std::string( qsLibArticle ) );
+    mlstLibelle.push_back( std::string( qsLibArticle ) );
     Article *tmp = new Article( qsNumArticle, qsLibArticle );
     //ajouter l'article a la liste
-    if( NULL != tmp )lstArticles.push_back(tmp);
+    if( NULL != tmp )mlstArticles.push_back(tmp);
     return NULL != tmp;
 }
 
@@ -36,13 +36,36 @@ bool Las::fnCreerArticle(const std::string &qsNumArticle, const std::string &qsL
 */
 const std::list<std::string> *Las::fnRetourListeLibelle()const
 {
-    if( lstLibelle.empty() )
+    if( mlstLibelle.empty() )
     {
         return NULL;
     }
-    return &lstLibelle;
+    return &mlstLibelle;
 }
 
+/**
+* @brief Fonction de transfert des donnees pour la creation d'un lot vers l'article en question.
+* @param sChoixArt: Le choix de l'article en provenance du formulaire du Lot.
+* @param sNumLot: Le numero de lot en provenance du formulaire du Lot.
+* @return false si l'objet Lot n'a pas pu etre instancié, true sinon.
+*/
+bool Las::bfnReceptionnerInformationsCreationLot(
+        const std::string &sChoixArt, const std::string &sNumLot)
+{
+    bool granted=false;
+    //recherche dans la liste de l'article correspondant au libelle
+    for( std::list<Article*>::iterator it = mlstArticles.begin() ;
+        it != mlstArticles.end() ; ++it)
+    {
+        //si l'article est trouve
+        if( (*it) && sChoixArt == (*it)->fnLireLibelleArticle() )
+        {
+            granted = (*it) -> bfnCreerLot(sNumLot);
+            break;
+        }
+    }
+    return granted;
+}
 
 /**
 * @brief Fonction pour vider la liste d'article.
@@ -51,13 +74,13 @@ const std::list<std::string> *Las::fnRetourListeLibelle()const
 void Las::fnViderListeArticle()
 {
     //si la liste est vide
-    if( lstArticles.empty() )return;
-    for( std::list<Article*>::iterator it = lstArticles.begin() ;
-        it != lstArticles.end() ; ++it)
+    if( mlstArticles.empty() )return;
+    for( std::list<Article*>::iterator it = mlstArticles.begin() ;
+        it != mlstArticles.end() ; ++it)
     {
        delete (*it);
     }
-    lstArticles.clear();
+    mlstArticles.clear();
 }
 
 /**
