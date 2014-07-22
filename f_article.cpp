@@ -13,6 +13,7 @@ F_Article::F_Article(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::F_Article)
 {
+    mptrGestionnaireFenetre=NULL;
     ui->setupUi(this);
 }
 

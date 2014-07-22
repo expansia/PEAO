@@ -18,6 +18,7 @@
 #define PEAO_HPP
 
 #include <string>
+#include <list>
 
 class GestionnaireFenetre;
 class Las;
@@ -47,10 +48,11 @@ public:
     bool bfnLancerProgrammePrincipal();
     void fnInitialiserOperation();
     void fnQuitterOperation();
-    bool bfnOperationEnCours();
+    bool bfnOperationEnCours()const;
     bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
     bool fnReceptionnerInformationsCreationArticle(
-            const std::string& qsNumArt,const std::string& qsLibArt);
+    const std::string& qsNumArt,const std::string& qsLibArt);
+    const std::list<std::string> *lstfnRetourListeLibelle()const;
     ~PEAO();
 };
 

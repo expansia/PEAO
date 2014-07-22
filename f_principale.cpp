@@ -20,6 +20,7 @@
 #include "ui_f_principale.h"
 #include <QMessageBox>
 
+
 /**
 * @brief Constructeur de la classe F_Principale.
 * Liaison du composant avec l'arborescence Qt.
@@ -30,6 +31,8 @@ F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale)
 {
+    mptrGestionnaireFenetre=NULL;
+    muiNombreArticle=0;
     ui->setupUi(this);
 }
 
@@ -83,10 +86,27 @@ void F_Principale::fnEcrireInformationsLAS(
 void F_Principale::fnEcrireInformationsNouvelArticle(
         const std::string &numArticle, const std::string &libArticle)
 {
-
     std::string strBase =  "Numero Article : " + numArticle +
             "    Libelle de l'article' : " + libArticle;
-    ui->lbArticle1->setText( QString( strBase.c_str() ) );
+    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
+    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
+    switch( muiNombreArticle % 3 )
+    {
+    case 0:
+        ui->lbArticle1->setText( QString( strBase.c_str() ) );
+        break;
+
+    case 1:
+        ui->lbArticle2->setText( QString( strBase.c_str() ) );
+        break;
+
+    case 2:
+        ui->lbArticle3->setText( QString( strBase.c_str() ) );
+        break;
+    default:
+        break;
+     }
+    muiNombreArticle++;
 }
 
 /**
@@ -118,6 +138,20 @@ void F_Principale::on_btAjoutArticle_clicked()
 }
 
 /**
+* @brief Reception du signal du bouton pour ajouter un lot à un article.
+* Envoie de l'information a l'objet GestionnaireFenetre.
+*/
+void F_Principale::on_btAjoutLot_clicked()
+{
+    if( false == mptrGestionnaireFenetre->fnDemandeAjoutLot() )
+    {
+        QMessageBox::information(this, "Impossible d'ajouter un nouveau lot",
+                                 "Veuillez entrer au moins 1 article.");
+    }
+}
+
+
+/**
 * @brief Destructeur de la classe F_Principale.
 * Supression de l'interface d'édition de la fenêtre.
 */
@@ -125,5 +159,3 @@ F_Principale::~F_Principale()
 {
     delete ui;
 }
-
-

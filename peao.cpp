@@ -73,12 +73,13 @@ void PEAO::fnQuitterOperation()
 
 /**
 * @brief Fonction determinant si une operation est en cours de traitement.
-* Renvoie la valeur du booleen mb_OperationEnCours.
-* @return true si une operation est en cours de traitement. false sinon.
+* Renvoie la valeur du booleen mb_OperationEnCours && NULL != Las.
+* @return true si une operation est en cours de traitement et que l'
+* objet Las est bien instancié. false sinon.
 */
-bool PEAO::bfnOperationEnCours()
+bool PEAO::bfnOperationEnCours() const
 {
-    return mb_OperationEnCours;
+    return mb_OperationEnCours && NULL != mLas;
 }
 
 /**
@@ -126,6 +127,18 @@ bool PEAO::fnReceptionnerInformationsCreationArticle(
     //return NULL != mLas;
 }
 
+/**
+* @brief Fonction recuperant et renvoyant la liste de libelle contenu dans l'objet Las.
+* @return La liste des libelle. NULL si aucun article n'est instancié.
+*/
+const std::list<std::string> *PEAO::lstfnRetourListeLibelle()const
+{
+    if( NULL == mLas )
+    {
+        return NULL;
+    }
+    return mLas->fnRetourListeLibelle();
+}
 
 /**
 * @brief Destructeur de la classe GestionnaireFenetre.

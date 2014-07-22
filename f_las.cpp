@@ -49,7 +49,7 @@ void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 * Si tel est le cas ces données vont être envoyées à l'objet
 * GestionnaireFenetre.
 */
-void F_LAS::on_buttonBox_accepted()
+void F_LAS::on_btValider_clicked()
 {
     QString textAAfficher="", receptNumeroDeLot, receptCodeProcess;
     receptNumeroDeLot = ui->leNumLot->text();
@@ -77,8 +77,18 @@ void F_LAS::on_buttonBox_accepted()
         //affichage de la fenêtre
         mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLAS(
                      receptCodeProcess.toStdString(),  receptNumeroDeLot.toStdString() );
-
+        close();
 }
+
+/**
+* @brief Reception du signal d'annulation du formulaire de la LAS.
+* La fenetre se ferme.
+*/
+void F_LAS::on_btAnnuler_clicked()
+{
+    close();
+}
+
 
 /**
 * @brief Destructeur de la classe F_LAS.

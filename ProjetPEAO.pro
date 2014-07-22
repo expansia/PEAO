@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     gestionnairefenetre.cpp \
     las.cpp \
     f_article.cpp \
-    article.cpp
+    article.cpp \
+    f_lot.cpp
 
 HEADERS  += f_principale.hpp \
     f_las.hpp \
@@ -28,8 +29,10 @@ HEADERS  += f_principale.hpp \
     constantes.hpp \
     las.hpp \
     f_article.hpp \
-    article.hpp
+    article.hpp \
+    f_lot.hpp
 
 FORMS    += f_principale.ui \
     f_las.ui \
-    f_article.ui
+    f_article.ui \
+    f_lot.ui

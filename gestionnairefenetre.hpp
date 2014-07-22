@@ -20,6 +20,7 @@
 #include <string>
 
 class F_LAS;
+class F_Lot;
 class F_Principale;
 class F_Article;
 class PEAO;
@@ -44,11 +45,13 @@ private:
     F_LAS *mfenetreLAS;
     F_Article *mfenetreArticle;
     PEAO *mptrMemoPEAO;
+    F_Lot *mptrFenetreLot;
 public:
     GestionnaireFenetre(PEAO *ptrPEAO);
     bool bfnAfficherFenetre( const unsigned int &choixFenetre );
     bool bfnOperationEnCours();
     void fnInitialiserOperation();
+    bool fnDemandeAjoutLot();
     void fnReceptionnerInformationsCreationLAS( const std::string &qsCodeProcess,
                                         const std::string &qsNumLot );
     void fnReceptionnerInformationsCreationArticle(

@@ -18,6 +18,7 @@
 #include "f_principale.hpp"
 #include "f_las.hpp"
 #include "f_article.hpp"
+#include "f_lot.hpp"
 #include "constantes.hpp"
 #include "peao.hpp"
 
@@ -30,9 +31,11 @@
 */
 GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 {
+    mptrMemoPEAO=NULL;
     mfenetreLAS = new F_LAS();
     mfenetrePrincipale = new F_Principale();
     mfenetreArticle = new F_Article();
+    mptrFenetreLot = new F_Lot();
     //mémorisation du pointeur vers l'objet PEAO
     mptrMemoPEAO = ptrPEAO;
     /*envoie d'un pointeur de l'objet courant(GestionnaireFenetre)
@@ -64,6 +67,7 @@ bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
         mfenetreArticle->show();
         break;
     case F_FORMLOT:
+        mptrFenetreLot->show();
         break;
     default:
         return false;
@@ -100,7 +104,7 @@ void GestionnaireFenetre::fnReceptionnerInformationsCreationLAS(
 void GestionnaireFenetre::fnReceptionnerInformationsCreationArticle(
         const std::string &qsNumArticle, const std::string &qsLibArticle)
 {
-    //verification si l'objet Las a bien ete instancie
+    //verification si l'objet Article a bien ete instancie
     if( mptrMemoPEAO->fnReceptionnerInformationsCreationArticle(
                 qsNumArticle, qsLibArticle ) )
     {
@@ -123,6 +127,27 @@ bool GestionnaireFenetre::bfnOperationEnCours()
 }
 
 /**
+* @brief Recuperation d'un pointeur vers la liste de libelle.
+* Appel de la fonction bfnOperationEnCours() par le pointeur mptrMemoPEAO.
+* @return true si au moins un article est instancie, false sinon.
+*/
+bool GestionnaireFenetre::fnDemandeAjoutLot()
+{
+    bool validation = true;
+    const std::list<std::string> *tmpListLib = mptrMemoPEAO->lstfnRetourListeLibelle();
+    if( NULL == tmpListLib )
+    {
+        validation = false;
+    }
+    else
+    {
+    mptrFenetreLot->fnEditionMenuDeroulantChoixArticle(tmpListLib);
+    bfnAfficherFenetre( F_FORMLOT );
+    }
+    return validation;
+}
+
+/**
 * @brief Appel de la fonction pour démarrer une operation PEAO dans l'objet PEAO.
 * Appel de la fonction fninitialiserOperation() par le pointeur mptrMemoPEAO.
 */
@@ -139,4 +164,6 @@ GestionnaireFenetre::~GestionnaireFenetre()
 {
     delete mfenetrePrincipale;
     delete mfenetreLAS;
+    delete mfenetreArticle;
+    delete mptrFenetreLot;
 }

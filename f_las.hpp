@@ -54,8 +54,10 @@ public:
     ~F_LAS();
 
 private slots:
-    void on_buttonBox_accepted();
+   // void on_buttonBox_accepted();
 
+    void on_btValider_clicked();
+    void on_btAnnuler_clicked();
 };
 
 #endif // F_LAS_HPP
