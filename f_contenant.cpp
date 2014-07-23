@@ -30,6 +30,7 @@ void F_Contenant::envoiDonneesLot( const std::string &sChoixArticle, const std::
     if( ui && ui->lbMasseTotaleLot )ui->lbMasseTotaleLot->setText( QString( sMasseTot.c_str() ) );
     if( ui && ui->lbLibArt )ui->lbLibArt->setText( QString( sChoixArticle.c_str() ) );
     if( ui && ui->lbNumLotArt )ui->lbNumLotArt->setText( QString( sNumeroLot.c_str() ) );
+    muiNombreContenant = 0;
 }
 
 /**

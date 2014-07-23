@@ -161,6 +161,8 @@ bool GestionnaireFenetre::bfnReceptionnerInformationsCreationContenant(const std
         }
             mfenetrePrincipale -> fnEcrireInformationsContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
                                            + "Contenant :" + sMemComplet );
+            mptrMemoFenetreContenant -> fnEcrireInformationsContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
+                                           + "Contenant :" + sMemComplet );
     }
     return granted;
 }
