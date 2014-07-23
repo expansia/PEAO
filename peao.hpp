@@ -53,10 +53,11 @@ public:
     bool fnReceptionnerInformationsCreationArticle(const std::string& sNumArt, const std::string& sLibArt);
     bool bfnReceptionnerInformationsCreationLot(const std::string &sChoixArticle,
                                                 const std::string &sNumeroLot, const std::string &sMasseTot);
-    bool bfnReceptionnerInformationsCreationContenant(
-                        const std::string &sLibArticle, const std::string &sNumLotArticle,
-                        const std::string &sMasseNetteContenant, const std::string &sNumContenant ,
-                        const bool &bContComplet );
+    bool bfnAjouterContenant(const std::string &sLibArticle,
+                             const std::string &sNumLotArticle,
+                             const std::string &sMasseNetteContenant,
+                             const std::string &sNumContenant,
+                             const bool &bContComplet );
     const std::list<std::string> *lstfnRetourListeLibelle()const;
     ~PEAO();
 };

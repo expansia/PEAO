@@ -59,10 +59,11 @@ public:
     void fnReceptionnerInformationsCreationLot(const std::string &sChoixArt,
                                                const std::string &sNumLot, const std::string &sMasseTotale);
     void fnReceptionnerInformationsCreationArticle(const std::string &sNumArticle, const std::string &sLibArticle);
-    bool bfnReceptionnerInformationsCreationContenant(
-                        const std::string &sLibArt, const std::string &sNumLotArt,
-                        const std::string &sMasseNetteCont, const std::string &sNumCont ,
-                        const bool &bContCompl );
+    bool bfnAjouterContenant(const std::string &sLibArt,
+                             const std::string &sNumLotArt,
+                             const std::string &sMasseNetteCont,
+                             const std::string &sNumCont,
+                             const bool &bContCompl );
     ~GestionnaireFenetre();
 };
 

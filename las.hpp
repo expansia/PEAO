@@ -23,10 +23,11 @@ public:
     void fnViderListeArticle();
     bool bfnReceptionnerInformationsCreationLot(const std::string &sChoixArt, const std::string &sNumLot,
                                                 const std::string &sMasseTotale);
-    bool bfnReceptionnerInformationsCreationContenant(
-                        const std::string &sLibArt, const std::string &sNumLotArt,
-                        const std::string &sMasseNetteCont, const std::string &sNumCont ,
-                        const bool &bContCompl );
+    bool bfnAjouterContenant(const std::string &sLibArt,
+                             const std::string &sNumLotArt,
+                             const std::string &sMasseNetteCont,
+                             const std::string &sNumCont,
+                             const bool &bContCompl );
     const std::list<std::string> *fnRetourListeLibelle()const;
     ~Las();
 };

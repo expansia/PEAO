@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     PEAO peao;
+    //GestionnaireFenetre gestFen(peao);
+    //peao.addView(gestFen);
     if( false == peao.bfnLancerProgrammePrincipal() )
     {
         return EXIT_FAILURE;

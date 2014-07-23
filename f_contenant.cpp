@@ -43,6 +43,7 @@ void F_Contenant::on_btAjoutContenant_clicked()
 {
     bool bContComplet=true;
     QString textErreur="", receptNumeroContenant, receptMasseNetteCont;
+
     if( ui && ui->leNumCont )receptNumeroContenant = ui->leNumCont->text();
     //recuperation du numéro d'e lot'article du formulaire
     if( ui && ui->leMasseNetteCont )receptMasseNetteCont = ui->leMasseNetteCont->text();
@@ -77,7 +78,7 @@ void F_Contenant::on_btAjoutContenant_clicked()
         {
             if( ui && ui->lbLibArt && ui->lbNumLotArt && ui->leMasseNetteCont && ui->leNumCont )
             {
-                if( false == mptrGestionnaireFenetre->bfnReceptionnerInformationsCreationContenant(
+                if( false == mptrGestionnaireFenetre->bfnAjouterContenant(
                         ui->lbLibArt->text().toStdString(), ui->lbNumLotArt->text().toStdString(),
                         ui->leMasseNetteCont->text().toStdString(),  ui->leNumCont->text().toStdString() ,
                         bContComplet ) )

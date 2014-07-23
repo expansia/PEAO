@@ -22,13 +22,13 @@ Lot::Lot(const std::string &sNumeroLot, const std::string &sMasseTotale)
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool Lot::bfnCreerContenant( const std::string &sMasseNetteCont,
+bool Lot::bfnAjouterContenant( const std::string &sMasseNetteCont,
                                  const std::string &sNumCont ,
                                  const bool &bContCompl )
 {
     bool granted = true;
     Contenant *tmp = new Contenant(sMasseNetteCont, sNumCont, bContCompl);
-    if( NULL ==tmp )
+    if( NULL == tmp )
     {
         granted = false;
     }

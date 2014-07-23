@@ -37,7 +37,7 @@ bool Article::bfnCreerLot(const std::string &sNumLot, const std::string &sMasseT
 * @param bContComplet: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool Article::bfnReceptionnerInformationsCreationContenant( const std::string &sNumLotArticle,
+bool Article::bfnAjouterContenant( const std::string &sNumLotArticle,
                     const std::string &sMasseNetteContenant, const std::string &sNumContenant ,
                     const bool &bContComplet )
 {
@@ -49,7 +49,7 @@ bool Article::bfnReceptionnerInformationsCreationContenant( const std::string &s
     }
     else
     {
-      granted = tmp -> bfnCreerContenant( sMasseNetteContenant, sNumContenant, bContComplet ) ;
+      granted = tmp->bfnAjouterContenant( sMasseNetteContenant, sNumContenant, bContComplet ) ;
     }
     return granted;
 }

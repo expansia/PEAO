@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>430</width>
+    <width>488</width>
     <height>460</height>
    </rect>
   </property>
@@ -30,9 +30,9 @@
    <widget class="QLabel" name="infoLAS">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>80</x>
       <y>50</y>
-      <width>221</width>
+      <width>261</width>
       <height>16</height>
      </rect>
     </property>
@@ -56,10 +56,10 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>0</y>
+      <x>330</x>
+      <y>10</y>
       <width>20</width>
-      <height>481</height>
+      <height>401</height>
      </rect>
     </property>
     <property name="orientation">
@@ -69,9 +69,9 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>30</y>
-      <width>291</width>
+      <width>311</width>
       <height>16</height>
      </rect>
     </property>
@@ -82,10 +82,10 @@
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>70</y>
-      <width>291</width>
-      <height>16</height>
+      <width>311</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="orientation">
@@ -95,10 +95,10 @@
    <widget class="Line" name="line_4">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>180</y>
-      <width>291</width>
-      <height>16</height>
+      <width>311</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="orientation">
@@ -108,10 +108,10 @@
    <widget class="Line" name="line_5">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>300</y>
-      <width>291</width>
-      <height>16</height>
+      <width>311</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="orientation">
@@ -121,7 +121,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>50</y>
       <width>46</width>
       <height>13</height>
@@ -131,37 +131,11 @@
      <string>LAS:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btAjoutArticle">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>180</y>
-      <width>81</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ajouter article</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnQuitterOperation">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>310</y>
-      <width>119</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Quitter opération</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>80</y>
+      <x>20</x>
+      <y>90</y>
       <width>46</width>
       <height>13</height>
      </rect>
@@ -186,10 +160,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>40</y>
-      <width>121</width>
-      <height>81</height>
+      <x>360</x>
+      <y>30</y>
+      <width>111</width>
+      <height>291</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -197,6 +171,27 @@
       <widget class="QPushButton" name="btnInitialiserOperation">
        <property name="text">
         <string>Initialiser opération</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAjouterArticle">
+       <property name="text">
+        <string>Ajouter article</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAjouterLot">
+       <property name="text">
+        <string>Ajouter Lot</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnQuitterOperation">
+       <property name="text">
+        <string>Quitter opération</string>
        </property>
       </widget>
      </item>
@@ -231,27 +226,14 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>190</y>
+      <x>20</x>
+      <y>200</y>
       <width>46</width>
       <height>13</height>
      </rect>
     </property>
     <property name="text">
      <string>Lot:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btAjoutLot">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>220</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ajouter Lot</string>
     </property>
    </widget>
    <widget class="QLabel" name="lbLot1">
@@ -296,8 +278,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>310</y>
+      <x>20</x>
+      <y>320</y>
       <width>61</width>
       <height>16</height>
      </rect>
@@ -355,14 +337,11 @@
    <zorder>line_4</zorder>
    <zorder>line_5</zorder>
    <zorder>label_2</zorder>
-   <zorder>btAjoutArticle</zorder>
-   <zorder>btnQuitterOperation</zorder>
    <zorder>label_3</zorder>
    <zorder>lbArticle1</zorder>
    <zorder>lbArticle2</zorder>
    <zorder>lbArticle3</zorder>
    <zorder>label_4</zorder>
-   <zorder>btAjoutLot</zorder>
    <zorder>lbLot1</zorder>
    <zorder>lbLot2</zorder>
    <zorder>lbLot3</zorder>
@@ -376,7 +355,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>430</width>
+     <width>488</width>
      <height>21</height>
     </rect>
    </property>

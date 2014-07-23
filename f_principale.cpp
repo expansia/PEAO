@@ -185,7 +185,7 @@ void F_Principale::on_btnQuitterOperation_clicked()
 * Verification qu'une operation est bien en cours,
 * et demande d'affichage du formulaire de l'article.
 */
-void F_Principale::on_btAjoutArticle_clicked()
+void F_Principale::on_btnAjouterArticle_clicked()
 {
     //si operation en cours
     if( mptrGestionnaireFenetre && mptrGestionnaireFenetre->bfnOperationEnCours() )
@@ -203,7 +203,7 @@ void F_Principale::on_btAjoutArticle_clicked()
 * @brief Reception du signal du bouton pour ajouter un lot à un article.
 * Envoi de l'information a l'objet GestionnaireFenetre.
 */
-void F_Principale::on_btAjoutLot_clicked()
+void F_Principale::on_btnAjouterLot_clicked()
 {
     if(  mptrGestionnaireFenetre && false == mptrGestionnaireFenetre->fnDemandeAjoutLot() )
     {

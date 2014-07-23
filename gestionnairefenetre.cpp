@@ -32,15 +32,20 @@
 */
 GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 {
-    mptrMemoPEAO=NULL;
-    mfenetreLAS = new F_LAS();
-    mfenetrePrincipale = new F_Principale();
-    mfenetreArticle = new F_Article();
-    mptrFenetreLot = new F_Lot();
-    mptrMemoFenetreContenant = new F_Contenant();
+    //mptrMemoPEAO=NULL; //BB : à quoi ça sert ?
+
+    // BB: il faudrait passer le pointeur vers Gestionnaire de fenêtre
+    // dans le constructeur des fenêtre. Ex: F_LAS(this)
+    mfenetreLAS                 = new F_LAS();
+    mfenetrePrincipale          = new F_Principale();
+    mfenetreArticle             = new F_Article();
+    mptrFenetreLot              = new F_Lot();
+    mptrMemoFenetreContenant    = new F_Contenant();
+
     //mémorisation du pointeur vers l'objet PEAO
     mptrMemoPEAO = ptrPEAO;
-    /*envoie d'un pointeur de l'objet courant(GestionnaireFenetre)
+
+    /*envoi d'un pointeur de l'objet courant(GestionnaireFenetre)
     vers les classes fenetre*/
     if( mfenetrePrincipale )
     {
@@ -56,11 +61,11 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
     }
     if( mptrFenetreLot )
     {
-        mptrFenetreLot -> fnMemoPtrGestionnaireFenetre( this );
+        mptrFenetreLot->fnMemoPtrGestionnaireFenetre( this );
     }
     if( mptrMemoFenetreContenant )
     {
-        mptrMemoFenetreContenant -> fnMemoPtrGestionnaireFenetre( this );
+        mptrMemoFenetreContenant->fnMemoPtrGestionnaireFenetre( this );
     }
 
 }
@@ -140,14 +145,13 @@ void GestionnaireFenetre::fnReceptionnerInformationsCreationLAS(
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool GestionnaireFenetre::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArt, const std::string &sNumLotArt,
+bool GestionnaireFenetre::bfnAjouterContenant(const std::string &sLibArt, const std::string &sNumLotArt,
                     const std::string &sMasseNetteCont, const std::string &sNumCont ,
                     const bool &bContCompl )
 {
     bool granted;
     if( !mptrMemoPEAO )return false;
-    granted = mptrMemoPEAO->bfnReceptionnerInformationsCreationContenant(sLibArt, sNumLotArt,
-                                                                      sMasseNetteCont, sNumCont, bContCompl);
+    granted = mptrMemoPEAO->bfnAjouterContenant(sLibArt, sNumLotArt,sMasseNetteCont, sNumCont, bContCompl);
     if (true == granted )
     {
         std::string sMemComplet;

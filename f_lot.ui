@@ -2,128 +2,145 @@
 <ui version="4.0">
  <class>F_Lot</class>
  <widget class="QDialog" name="F_Lot">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>261</height>
+    <width>363</width>
+    <height>255</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Formulaire Lot</string>
   </property>
-  <widget class="QComboBox" name="cbChoixArticle">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>70</y>
-     <width>231</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Choix de l'article:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>110</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Numero de lot Article:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="leNumLotArticle">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>110</y>
-     <width>151</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>20</x>
      <y>10</y>
-     <width>231</width>
-     <height>51</height>
+     <width>341</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Veuillez selectionner un article auquel sera
- ajouter le lot et préciser son numéro de lot 
-ainsi que sa masse totale.</string>
+    <string>Veuillez selectionner un article auquel sera ajouté le lot et préciser 
+son numéro de lot ainsi que sa masse totale.</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btValiderFormLot">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>210</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Valider</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btAnnulerFormLot">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>210</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Annuler</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="leMasseTotaleLot">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>150</y>
-     <width>151</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="Line" name="line">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>150</y>
-     <width>111</width>
+     <y>180</y>
+     <width>341</width>
      <height>16</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Masse Totale du lot :</string>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>210</y>
+     <width>201</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item>
+     <widget class="QPushButton" name="btValiderFormLot">
+      <property name="text">
+       <string>Valider</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btAnnulerFormLot">
+      <property name="text">
+       <string>Annuler</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>51</y>
+     <width>311</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Choix de l'article:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbChoixArticle"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Numero de lot Article:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="leNumLotArticle"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Masse Totale du lot :</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="leMasseTotaleLot"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>kg</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>cbChoixArticle</tabstop>
+  <tabstop>leNumLotArticle</tabstop>
+  <tabstop>leMasseTotaleLot</tabstop>
+  <tabstop>btValiderFormLot</tabstop>
+  <tabstop>btAnnulerFormLot</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

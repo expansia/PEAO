@@ -97,21 +97,21 @@ Article *Las::ptrArtRetourArticle( const std::string &sLibelleArt )
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool Las::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArt, const std::string &sNumLotArt,
+bool Las::bfnAjouterContenant(const std::string &sLibArt, const std::string &sNumLotArt,
                     const std::string &sMasseNetteCont, const std::string &sNumCont ,
                     const bool &bContCompl )
 {
     bool granted;
     //reception du pointeur vers le bon article
-    Article *tmp = ptrArtRetourArticle( sLibArt );
-    if( tmp == NULL )
+    Article *ptrArticle = ptrArtRetourArticle( sLibArt );
+    if( ptrArticle == NULL )
     {
         granted = false;
     }
     else
     {
         //appel de la fonction dans l'article correspondant
-        granted = tmp->bfnReceptionnerInformationsCreationContenant( sNumLotArt, sMasseNetteCont, sNumCont, bContCompl );
+        granted = ptrArticle->bfnAjouterContenant( sNumLotArt, sMasseNetteCont, sNumCont, bContCompl );
     }
     return granted;
 }

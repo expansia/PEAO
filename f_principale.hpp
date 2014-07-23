@@ -64,7 +64,8 @@ private slots:
 
     void on_btnInitialiserOperation_clicked();
     void on_btnQuitterOperation_clicked();
-    void on_btAjoutArticle_clicked();
-    void on_btAjoutLot_clicked();
+    void on_btnAjouterArticle_clicked();
+    void on_btnAjouterLot_clicked();
+    void on_btnAjoutertLot_clicked();
 };
 #endif // F_PRINCIPALE_HPP

@@ -110,13 +110,21 @@ bool PEAO::fnReceptionnerInformationsCreationLAS(
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool PEAO::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArticle, const std::string &sNumLotArticle,
+bool PEAO::bfnAjouterContenant(const std::string &sLibArticle, const std::string &sNumLotArticle,
                     const std::string &sMasseNetteContenant, const std::string &sNumContenant ,
                     const bool &bContComplet )
 {
-    if( NULL == mLas )return false;
-    mLas->bfnReceptionnerInformationsCreationContenant(sLibArticle, sNumLotArticle, sMasseNetteContenant,
-                                                       sNumContenant, bContComplet);
+    bool retour = false;
+    if ( NULL == mLas )
+    {
+        retour = false;
+    }
+    else
+    {
+        retour = mLas->bfnAjouterContenant(sLibArticle, sNumLotArticle, sMasseNetteContenant,
+                                           sNumContenant, bContComplet);
+    }
+    return retour;
 }
 
 /**
