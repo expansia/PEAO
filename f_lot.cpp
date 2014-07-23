@@ -65,11 +65,13 @@ void F_Lot::on_btAnnulerFormLot_clicked()
 */
 void F_Lot::on_btValiderFormLot_clicked()
 {
-    QString textErreur="", receptNumeroDeLot, receptChoixArticle;
+    QString textErreur="", receptNumeroDeLot, receptChoixArticle, receptMasseTotaleLot;
     if( ui && ui->leNumLotArticle )receptNumeroDeLot = ui->leNumLotArticle->text();
     //recuperation du numéro de lot du formulaire
     if( ui && ui->cbChoixArticle )receptChoixArticle = ui->cbChoixArticle->currentText();
     //recuperation du choix de l'article dans le menu déroulant
+    if( ui && ui->leMasseTotaleLot )receptMasseTotaleLot = ui->leMasseTotaleLot->text();
+    //recuperation de la masse totale du formulaire
     if(receptNumeroDeLot.size() == 0)//si champ numéro de lot vide
     {
         textErreur+="Erreur: numéro de lot non entré \n";
@@ -77,7 +79,11 @@ void F_Lot::on_btValiderFormLot_clicked()
     }
     if(receptChoixArticle.size() == 0)//si champ code process vide
     {
-        textErreur+="Erreur: aucun article selectionne";
+        textErreur+="Erreur: aucun article selectionne\n";
+    }
+    if(receptMasseTotaleLot.size() == 0)//si champ code process vide
+    {
+        textErreur+="Erreur: masse totale non entree";
     }
     if(textErreur.size() != 0)//si message d'erreur
     {
@@ -88,7 +94,8 @@ void F_Lot::on_btValiderFormLot_clicked()
     }
         //affichage de la fenêtre
         if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLot(
-                     receptChoixArticle.toStdString(),  receptNumeroDeLot.toStdString() );
+                     receptChoixArticle.toStdString(),  receptNumeroDeLot.toStdString(),
+                    receptMasseTotaleLot.toStdString());
         close();
 }
 

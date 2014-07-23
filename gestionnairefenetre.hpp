@@ -22,6 +22,7 @@
 class F_LAS;
 class F_Lot;
 class F_Principale;
+class F_Contenant;
 class F_Article;
 class PEAO;
 
@@ -45,6 +46,7 @@ private:
     F_LAS *mfenetreLAS;
     F_Article *mfenetreArticle;
     PEAO *mptrMemoPEAO;
+    F_Contenant *mptrMemoFenetreContenant;
     F_Lot *mptrFenetreLot;
 public:
     GestionnaireFenetre(PEAO *ptrPEAO);
@@ -52,12 +54,15 @@ public:
     bool bfnOperationEnCours();
     void fnInitialiserOperation();
     bool fnDemandeAjoutLot();
-    void fnReceptionnerInformationsCreationLAS( const std::string &qsCodeProcess,
-                                        const std::string &qsNumLot );
-    void fnReceptionnerInformationsCreationLot(
-            const std::string &sChoixArt, const std::string &sNumLot);
-    void fnReceptionnerInformationsCreationArticle(
-            const std::string &qsNumArticle, const std::string &qsLibArticle);
+    void fnReceptionnerInformationsCreationLAS( const std::string &sCodeProcess,
+                                        const std::string &sNumLot );
+    void fnReceptionnerInformationsCreationLot(const std::string &sChoixArt,
+                                               const std::string &sNumLot, const std::string &sMasseTotale);
+    void fnReceptionnerInformationsCreationArticle(const std::string &sNumArticle, const std::string &sLibArticle);
+    bool bfnReceptionnerInformationsCreationContenant(
+                        const std::string &sLibArt, const std::string &sNumLotArt,
+                        const std::string &sMasseNetteCont, const std::string &sNumCont ,
+                        const bool &bContCompl );
     ~GestionnaireFenetre();
 };
 

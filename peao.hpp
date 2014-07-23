@@ -49,11 +49,14 @@ public:
     void fnInitialiserOperation();
     void fnQuitterOperation();
     bool bfnOperationEnCours()const;
-    bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &qsNumLot);
-    bool fnReceptionnerInformationsCreationArticle(
-    const std::string& qsNumArt,const std::string& qsLibArt);
-    bool bfnReceptionnerInformationsCreationLot(
-            const std::string &sChoixArticle, const std::string &sNumeroLot);
+    bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &sNumLot);
+    bool fnReceptionnerInformationsCreationArticle(const std::string& sNumArt, const std::string& sLibArt);
+    bool bfnReceptionnerInformationsCreationLot(const std::string &sChoixArticle,
+                                                const std::string &sNumeroLot, const std::string &sMasseTot);
+    bool bfnReceptionnerInformationsCreationContenant(
+                        const std::string &sLibArticle, const std::string &sNumLotArticle,
+                        const std::string &sMasseNetteContenant, const std::string &sNumContenant ,
+                        const bool &bContComplet );
     const std::list<std::string> *lstfnRetourListeLibelle()const;
     ~PEAO();
 };

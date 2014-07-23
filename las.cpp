@@ -4,27 +4,27 @@
 /**
 * @brief Constructeur de la classe Las.
 *
-* @param qsCodeProcess: Code Process de la LAS.
-* @param qsNumLot: Numero de lot de la LAS.
+* @param sCodeProcess: Code Process de la LAS.
+* @param sNumLot: Numero de lot de la LAS.
 */
-Las::Las(const std::string &qsCodeProcess, const std::string &qsNumLot)
+Las::Las(const std::string &sCodeProcess, const std::string &sNumLot)
 {
-    msCodeProcess = qsCodeProcess;
-    msNumeroDeLot = qsNumLot;
+    msCodeProcess = sCodeProcess;
+    msNumeroDeLot = sNumLot;
 }
 
 /**
 * @brief Fonction pour creer un nouvel article.
 *
-* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
-* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 * @return false si l'objet Article n'a pas pu etre instancié, true sinon.
 */
-bool Las::fnCreerArticle(const std::string &qsNumArticle, const std::string &qsLibArticle)
+bool Las::fnCreerArticle(const std::string &sNumArticle, const std::string &sLibArticle)
 {
     //instanciation de l'article avec les parametres
-    mlstLibelle.push_back( std::string( qsLibArticle ) );
-    Article *tmp = new Article( qsNumArticle, qsLibArticle );
+    mlstLibelle.push_back( std::string( sLibArticle ) );
+    Article *tmp = new Article( sNumArticle, sLibArticle );
     //ajouter l'article a la liste
     if( NULL != tmp )mlstArticles.push_back(tmp);
     return NULL != tmp;
@@ -47,22 +47,71 @@ const std::list<std::string> *Las::fnRetourListeLibelle()const
 * @brief Fonction de transfert des donnees pour la creation d'un lot vers l'article en question.
 * @param sChoixArt: Le choix de l'article en provenance du formulaire du Lot.
 * @param sNumLot: Le numero de lot en provenance du formulaire du Lot.
+* @param sMasseTotale: La masse totale du lot.
 * @return false si l'objet Lot n'a pas pu etre instancié, true sinon.
 */
 bool Las::bfnReceptionnerInformationsCreationLot(
-        const std::string &sChoixArt, const std::string &sNumLot)
+        const std::string &sChoixArt, const std::string &sNumLot, const std::string &sMasseTotale)
 {
     bool granted=false;
-    //recherche dans la liste de l'article correspondant au libelle
+    Article *tmp = ptrArtRetourArticle( sChoixArt );
+    if( NULL == tmp )
+    {
+        granted = false;
+    }
+    else
+    {
+    granted = tmp -> bfnCreerLot(sNumLot, sMasseTotale);
+    }
+    return granted;
+}
+
+/**
+* @brief Fonction recherchant l'article possedant le libelle envoye en parametre.
+* @param sLibelleArt: Le libelle de l'article recherche.
+* @return L'article trouve. NULL si l'article n'a pas ete trouve.
+*/
+Article *Las::ptrArtRetourArticle( const std::string &sLibelleArt )
+{
+    //recherche dans la liste de l'article correspondant au libelle(sChoixArt)
     for( std::list<Article*>::iterator it = mlstArticles.begin() ;
         it != mlstArticles.end() ; ++it)
     {
         //si l'article est trouve
-        if( (*it) && sChoixArt == (*it)->fnLireLibelleArticle() )
+        if( (*it) && sLibelleArt == (*it)->fnLireLibelleArticle() )
         {
-            granted = (*it) -> bfnCreerLot(sNumLot);
-            break;
+            return (*it);
         }
+    }
+    return NULL;
+}
+
+/**
+* @brief Fonction de recuperation des donnees du formulaire d'un contenant.
+* La fonction transfere les donnees necessaires a la creation d'un contenant a l'objet Article,
+* selectionne a l'aide du parametre sLibArt.
+* @param sLibArt: Le libelle de l'article qui possede le lot.
+* @param sNumLotArt: Le numero de lot qui contient le contenant.
+* @param sMasseNetteCont: La masse nette du contenant.
+* @param sNumCont: Le numero du contenant.
+* @param bContCompl: Le choix entre contenant fractionne et complet.
+* @return true si l'objet Contenant a bien ete instancie, false sinon.
+*/
+bool Las::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArt, const std::string &sNumLotArt,
+                    const std::string &sMasseNetteCont, const std::string &sNumCont ,
+                    const bool &bContCompl )
+{
+    bool granted;
+    //reception du pointeur vers le bon article
+    Article *tmp = ptrArtRetourArticle( sLibArt );
+    if( tmp == NULL )
+    {
+        granted = false;
+    }
+    else
+    {
+        //appel de la fonction dans l'article correspondant
+        granted = tmp->bfnReceptionnerInformationsCreationContenant( sNumLotArt, sMasseNetteCont, sNumCont, bContCompl );
     }
     return granted;
 }

@@ -31,9 +31,9 @@ F_Principale::F_Principale(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::F_Principale)
 {
-    muiNombreLot=0;
-    mptrGestionnaireFenetre=NULL;
-    muiNombreArticle=0;
+    muiNombreLot = 0;
+    mptrGestionnaireFenetre = NULL;
+    muiNombreArticle = 0;
     if( ui )ui->setupUi(this);
 }
 
@@ -44,7 +44,7 @@ F_Principale::F_Principale(QWidget *parent) :
 */
 void F_Principale::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 {
-    mptrGestionnaireFenetre=memoPtrGF;
+    mptrGestionnaireFenetre = memoPtrGF;
 }
 
 
@@ -117,10 +117,10 @@ void F_Principale::fnEcrireInformationsNouvelArticle(
 * @param libArticle: Libelle de l'article.
 */
 void F_Principale::fnEcrireInformationsLot(
-        const std::string &sChoixArticle, const std::string &sNumeroLot)
+        const std::string &sChoixArticle, const std::string &sNumeroLot, const std::string &sMasseTot)
 {
     std::string strBase =  "Libelle Article : " + sChoixArticle +
-            "    Numero de lot' : " + sNumeroLot;
+            "    Numero de lot' : " + sNumeroLot + "    Numero de lot' : " + sMasseTot;
     //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
     //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
     switch( muiNombreLot % 3 )
@@ -140,6 +140,35 @@ void F_Principale::fnEcrireInformationsLot(
         break;
      }
     muiNombreLot++;
+}
+
+
+/**
+* @brief Affichage des informations du nouveau contenant dans la fenetre principalle.
+*
+* @param : sChaineAEcrire : Chaine a ecrire dans une des etiquettes.
+*/
+void F_Principale::fnEcrireInformationsContenant( const std::string &sChaineAEcrire )
+{
+    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
+    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
+    switch( muiNombreContenant % 3 )
+    {
+    case 0:
+       if( ui && ui->lbContenant1  ) ui->lbContenant1->setText( QString( sChaineAEcrire.c_str() ) );
+        break;
+
+    case 1:
+        if( ui && ui->lbContenant2 )ui->lbContenant2->setText( QString( sChaineAEcrire.c_str() ) );
+        break;
+
+    case 2:
+        if( ui && ui->lbContenant3 )ui->lbContenant3->setText( QString( sChaineAEcrire.c_str() ) );
+        break;
+    default:
+        break;
+     }
+    muiNombreContenant++;
 }
 
 /**
@@ -172,7 +201,7 @@ void F_Principale::on_btAjoutArticle_clicked()
 
 /**
 * @brief Reception du signal du bouton pour ajouter un lot à un article.
-* Envoie de l'information a l'objet GestionnaireFenetre.
+* Envoi de l'information a l'objet GestionnaireFenetre.
 */
 void F_Principale::on_btAjoutLot_clicked()
 {

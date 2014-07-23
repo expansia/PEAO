@@ -7,20 +7,8 @@
     <x>0</x>
     <y>0</y>
     <width>385</width>
-    <height>172</height>
+    <height>261</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>385</width>
-    <height>172</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>385</width>
-    <height>172</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Formulaire Lot</string>
@@ -82,15 +70,15 @@
    </property>
    <property name="text">
     <string>Veuillez selectionner un article auquel sera
- ajouter le lot
- et préciser son numéro de lot.</string>
+ ajouter le lot et préciser son numéro de lot 
+ainsi que sa masse totale.</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btValiderFormLot">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>140</y>
+     <x>70</x>
+     <y>210</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -102,14 +90,37 @@
   <widget class="QPushButton" name="btAnnulerFormLot">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>140</y>
+     <x>210</x>
+     <y>210</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Annuler</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="leMasseTotaleLot">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>150</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Masse Totale du lot :</string>
    </property>
   </widget>
  </widget>

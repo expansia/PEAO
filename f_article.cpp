@@ -53,8 +53,6 @@ void F_Article::on_btValiderArt_clicked()
         close();
 }
 
-
-
 /**
 * @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
 * Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.

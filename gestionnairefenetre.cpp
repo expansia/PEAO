@@ -19,6 +19,7 @@
 #include "f_las.hpp"
 #include "f_article.hpp"
 #include "f_lot.hpp"
+#include "f_contenant.hpp"
 #include "constantes.hpp"
 #include "peao.hpp"
 
@@ -36,6 +37,7 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
     mfenetrePrincipale = new F_Principale();
     mfenetreArticle = new F_Article();
     mptrFenetreLot = new F_Lot();
+    mptrMemoFenetreContenant = new F_Contenant();
     //mémorisation du pointeur vers l'objet PEAO
     mptrMemoPEAO = ptrPEAO;
     /*envoie d'un pointeur de l'objet courant(GestionnaireFenetre)
@@ -56,6 +58,11 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
     {
         mptrFenetreLot -> fnMemoPtrGestionnaireFenetre( this );
     }
+    if( mptrMemoFenetreContenant )
+    {
+        mptrMemoFenetreContenant -> fnMemoPtrGestionnaireFenetre( this );
+    }
+
 }
 
 /**
@@ -81,6 +88,10 @@ bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
        }
         break;
     case F_FORM_CONTENANT:
+        if( mptrMemoFenetreContenant )
+        {
+            mptrMemoFenetreContenant->show();
+        }
         break;
     case F_FORM_ARTICLE:
         if( mfenetreArticle )
@@ -105,39 +116,79 @@ bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
 * @brief Fonction de recuperation des donnees du formulaire de la LAS.
 * La fonction reçoit le code process ainsi que le numero de lot de LAS
 * et les renvoie a l'objet PEAO
-* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
-* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
 void GestionnaireFenetre::fnReceptionnerInformationsCreationLAS(
-        const std::string &qsCodeProcess, const std::string &qsNumLot)
+        const std::string &sCodeProcess, const std::string &sNumLot)
 {
     //verification si l'objet Las a bien ete instancie
     if( mptrMemoPEAO  && mptrMemoPEAO->fnReceptionnerInformationsCreationLAS(
-                qsCodeProcess, qsNumLot ) )
+                sCodeProcess, sNumLot ) )
     {
-         if( mfenetrePrincipale )mfenetrePrincipale->fnEcrireInformationsLAS(qsCodeProcess, qsNumLot);
+         if( mfenetrePrincipale )mfenetrePrincipale->fnEcrireInformationsLAS(sCodeProcess, sNumLot);
     }
 }
 
+/**
+* @brief Fonction de recuperation des donnees du formulaire d'un contenant.
+* La fonction transfere les donnees necessaires a la creation d'un contenant a l'objet PEAO.
+* @param sLibArt: Le libelle de l'article qui possede le lot.
+* @param sNumLotArt: Le numero de lot qui contient le contenant.
+* @param sMasseNetteCont: La masse nette du contenant.
+* @param sNumCont: Le numero du contenant.
+* @param bContCompl: Le choix entre contenant fractionne et complet.
+* @return true si l'objet Contenant a bien ete instancie, false sinon.
+*/
+bool GestionnaireFenetre::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArt, const std::string &sNumLotArt,
+                    const std::string &sMasseNetteCont, const std::string &sNumCont ,
+                    const bool &bContCompl )
+{
+    bool granted;
+    if( !mptrMemoPEAO )return false;
+    granted = mptrMemoPEAO->bfnReceptionnerInformationsCreationContenant(sLibArt, sNumLotArt,
+                                                                      sMasseNetteCont, sNumCont, bContCompl);
+    if (true == granted )
+    {
+        std::string sMemComplet;
+        if( true == bContCompl )
+        {
+            sMemComplet = "complet";
+        }
+        else
+        {
+            sMemComplet = "fractionne";
+        }
+            mfenetrePrincipale -> fnEcrireInformationsContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
+                                           + "Contenant :" + sMemComplet );
+    }
+    return granted;
+}
 
 /**
 * @brief Fonction de recuperation des donnees du formulaire de la LAS.
 * La fonction reçoit le code process ainsi que le numero de lot de LAS
 * et les renvoie a l'objet PEAO
-* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
-* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sMasseTotale: La masse totale du lot en provenance du formulaire de la LAS.
 */
-void GestionnaireFenetre::fnReceptionnerInformationsCreationLot(
-        const std::string &sChoixArt, const std::string &sNumLot)
+void GestionnaireFenetre::fnReceptionnerInformationsCreationLot(const std::string &sChoixArt,
+                                                                const std::string &sNumLot,
+                                                                const std::string &sMasseTotale)
 {
     //verification si l'objet Lot a bien ete instancie
     if(  mptrMemoPEAO && mptrMemoPEAO->bfnReceptionnerInformationsCreationLot(
-                sChoixArt, sNumLot ) )
+                sChoixArt, sNumLot, sMasseTotale ) )
     {
          if( mfenetrePrincipale )
          {
-             mfenetrePrincipale->fnEcrireInformationsLot(sChoixArt, sNumLot);
+             //Mise a jour des informations dans la fenetre principalle
+             mfenetrePrincipale->fnEcrireInformationsLot(sChoixArt, sNumLot, sMasseTotale);
          }
+        //Lorsque le lot a ete cree, le formulaire de creation de contenant(de ce lot) est automatiquement appele.
+         mptrMemoFenetreContenant->envoiDonneesLot( sChoixArt, sNumLot, sMasseTotale );
+         bfnAfficherFenetre( F_FORM_CONTENANT );
     }
 }
 
@@ -147,19 +198,19 @@ void GestionnaireFenetre::fnReceptionnerInformationsCreationLot(
 * @brief Fonction de recuperation des donnees du formulaire d'e la LAS'un article.
 * La fonction reçoit le numero d'article ainsi que son libelle
 * et les renvoie a l'objet PEAO.
-* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
-* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
 void GestionnaireFenetre::fnReceptionnerInformationsCreationArticle(
-        const std::string &qsNumArticle, const std::string &qsLibArticle)
+        const std::string &sNumArticle, const std::string &sLibArticle)
 {
     //verification si l'objet Article a bien ete instancie
     if(  mptrMemoPEAO && mptrMemoPEAO->fnReceptionnerInformationsCreationArticle(
-                qsNumArticle, qsLibArticle ) )
+                sNumArticle, sLibArticle ) )
     {
          if( mfenetrePrincipale )
          {
-             mfenetrePrincipale->fnEcrireInformationsNouvelArticle(qsNumArticle, qsLibArticle);
+             mfenetrePrincipale->fnEcrireInformationsNouvelArticle(sNumArticle, sLibArticle);
          }
     }
     else
@@ -232,4 +283,5 @@ GestionnaireFenetre::~GestionnaireFenetre()
     delete mfenetreLAS;
     delete mfenetreArticle;
     delete mptrFenetreLot;
+    delete mptrMemoFenetreContenant;
 }

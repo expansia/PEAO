@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     f_article.cpp \
     article.cpp \
     f_lot.cpp \
-    lot.cpp
+    lot.cpp \
+    f_contenant.cpp \
+    contenant.cpp
 
 HEADERS  += f_principale.hpp \
     f_las.hpp \
@@ -32,9 +34,12 @@ HEADERS  += f_principale.hpp \
     f_article.hpp \
     article.hpp \
     f_lot.hpp \
-    lot.hpp
+    lot.hpp \
+    f_contenant.hpp \
+    contenant.hpp
 
 FORMS    += f_principale.ui \
     f_las.ui \
     f_article.ui \
-    f_lot.ui
+    f_lot.ui \
+    f_contenant.ui

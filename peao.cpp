@@ -89,17 +89,35 @@ bool PEAO::bfnOperationEnCours() const
 * La fonction reçoit le code process ainsi que le numero de lot de LAS
 * et s'en sert pour instancier un nouvel objet LAS.
 * Il ne peut y avoir qu'une seule LAS instanciee.
-* @param qsCodeProcess: Le code process en provenance du formulaire de la LAS.
-* @param qsNumLot: Le numero de lot en provenance du formulaire de la LAS.
+* @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
+* @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 * @return false si l'objet Las n'a pas pu etre instancié, true sinon.
 */
 bool PEAO::fnReceptionnerInformationsCreationLAS(
-        const std::string& qsCodeProcess,const std::string& qsNumLot)
+        const std::string& sCodeProcess,const std::string& sNumLot)
 {
-    mLas = new Las(qsCodeProcess, qsNumLot);
+    mLas = new Las(sCodeProcess, sNumLot);
     return NULL != mLas;
 }
 
+/**
+* @brief Fonction de recuperation des donnees du formulaire d'un contenant.
+* La fonction transfere les donnees necessaires a la creation d'un contenant a l'objet Las.
+* @param sLibArt: Le libelle de l'article qui possede le lot.
+* @param sNumLotArt: Le numero de lot qui contient le contenant.
+* @param sMasseNetteCont: La masse nette du contenant.
+* @param sNumCont: Le numero du contenant.
+* @param bContCompl: Le choix entre contenant fractionne et complet.
+* @return true si l'objet Contenant a bien ete instancie, false sinon.
+*/
+bool PEAO::bfnReceptionnerInformationsCreationContenant(const std::string &sLibArticle, const std::string &sNumLotArticle,
+                    const std::string &sMasseNetteContenant, const std::string &sNumContenant ,
+                    const bool &bContComplet )
+{
+    if( NULL == mLas )return false;
+    mLas->bfnReceptionnerInformationsCreationContenant(sLibArticle, sNumLotArticle, sMasseNetteContenant,
+                                                       sNumContenant, bContComplet);
+}
 
 /**
 * @brief Fonction de recuperation des donnees en provenance de l'objet
@@ -111,9 +129,9 @@ bool PEAO::fnReceptionnerInformationsCreationLAS(
 * @return false si l'objet Lot n'a pas pu etre instancié, true sinon.
 */
 bool PEAO::bfnReceptionnerInformationsCreationLot(
-        const std::string &sChoixArticle, const std::string &sNumeroLot)
+        const std::string &sChoixArticle, const std::string &sNumeroLot, const std::string &sMasseTot)
 {
-    if( mLas )return mLas -> bfnReceptionnerInformationsCreationLot(sChoixArticle, sNumeroLot);
+    if( mLas )return mLas -> bfnReceptionnerInformationsCreationLot(sChoixArticle, sNumeroLot, sMasseTot);
     return false;
 }
 
@@ -123,12 +141,12 @@ bool PEAO::bfnReceptionnerInformationsCreationLot(
 * GestionnaireFenetre concernant un article.
 * La fonction reçoit le numero d'article ainsi que le libelle de l'article
 * et l'envoi a l'objet Las.
-* @param qsNumArt: Le numero d'article en provenance du formulaire de l'article.
-* @param qsLibArt: Le libelle de en provenance du formulaire de l'article.
+* @param sNumArt: Le numero d'article en provenance du formulaire de l'article.
+* @param sLibArt: Le libelle de en provenance du formulaire de l'article.
 * @return false si l'objet Article n'a pas pu etre instancié, true sinon.
 */
 bool PEAO::fnReceptionnerInformationsCreationArticle(
-        const std::string& qsNumArt,const std::string& qsLibArt)
+        const std::string& sNumArt,const std::string& sLibArt)
 {
     //A modifier
     bool retour = false;
@@ -138,11 +156,17 @@ bool PEAO::fnReceptionnerInformationsCreationArticle(
     }
     else
     {
-        if( mLas )retour = mLas->fnCreerArticle(qsNumArt, qsLibArt);
-        retour = false;
+        if( mLas )
+        {
+            retour = mLas->fnCreerArticle(sNumArt, sLibArt);
+        }
+        else
+        {
+         retour = false;
+        }
     }
     return retour;
-    //mLas = new Las(qsCodeProcess, qsNumLot);
+    //mLas = new Las(sCodeProcess, sNumLot);
     //return NULL != mLas;
 }
 
