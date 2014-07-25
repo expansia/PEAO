@@ -6,6 +6,15 @@
 
 class Contenant;
 
+/**
+ * @class Lot
+ * @brief Classe Representant un Lot.
+ *
+ * Cette classe possede la masse totale ainsi que le numero de lot d'un lot.
+ * Elle comporte egalement la liste des contenants qui lui sont associes.
+ * Elle assure la gestion de ces derniers.
+ *
+ */
 class Lot
 {
 private:

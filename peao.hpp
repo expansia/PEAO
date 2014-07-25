@@ -34,7 +34,7 @@ class Las;
  *
  * exemple:
  * peao.bfnLancerProgrammePrincipal()
- * //Lancement du programme et affichage de la fenetre principale
+ * Lancement du programme et affichage de la fenetre principale
  *
  */
 class Peao

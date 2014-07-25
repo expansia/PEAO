@@ -6,6 +6,15 @@ class Article;
 #include <string>
 #include <list>
 
+/**
+ * @class Las
+ * @brief Classe Representant une liste a servir.
+ *
+ * Cette classe englobe tous les objets entre par l'utilisateur.
+ * Elle possede un numero de lot(LAS) ainsi qu'un code process.
+ * Il est possible de gerer les articles entrés par cette classe.
+ *
+ */
 class Las
 {
 private:

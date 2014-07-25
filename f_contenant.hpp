@@ -9,6 +9,17 @@ namespace Ui {
 class F_Contenant;
 }
 
+/**
+ * @class F_Contenant
+ * @brief Classe contenant le formulaire de création d'un contenant.
+ *
+ * Cette classe est invoquée lorsque l'utilisateur clique sur le bouton
+ * "ajouter contenant" de la fenêtre principalle.
+ * Elle permet de renseigner la masse nette du contenant son numéro de contenant
+ * et s'il s'agit d'un contenant fractionné ou complet.
+ * Ces informations sont transmises à l'objet "PEAO".
+ *
+ */
 class F_Contenant : public QDialog
 {
     Q_OBJECT

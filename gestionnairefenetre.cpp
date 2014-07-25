@@ -163,7 +163,7 @@ bool GestionnaireFenetre::bfnAjouterContenant( const std::string & sLibArt, cons
         {
             sMemComplet = "fractionne";
         }
-         mfenetrePrincipale -> fnAfficherContenant( sLibArt , sNumLotArt, sNumCont);
+         mfenetrePrincipale -> fnAfficherContenant( sMasseNetteCont, bContCompl, sNumCont );
            // mfenetrePrincipale -> fnAfficherContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
              //                              + "Contenant :" + sMemComplet );
             mptrMemoFenetreContenant -> fnAfficherContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont

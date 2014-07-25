@@ -3,6 +3,13 @@
 
 #include <string>
 
+/**
+ * @class Contenant
+ * @brief Classe Representant un Contenant.
+ *
+ * Cette classe possede la masse nette du contenant son numéro de contenant
+ * et s'il s'agit d'un contenant fractionné ou complet.
+ */
 class Contenant
 {
 private:

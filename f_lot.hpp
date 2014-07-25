@@ -9,6 +9,16 @@ namespace Ui {
 class F_Lot;
 }
 
+/**
+ * @class F_Lot
+ * @brief Classe contenant le formulaire de création d'un lot.
+ *
+ * Cette classe est invoquée lorsque l'utilisateur clique sur le bouton
+ * "ajouter lot" de la fenêtre principalle.
+ * Elle permet de renseigner la masse nette totale et le numéro de lot,
+ * Ces informations sont transmises à l'objet "PEAO".
+ *
+ */
 class F_Lot : public QDialog
 {
     Q_OBJECT

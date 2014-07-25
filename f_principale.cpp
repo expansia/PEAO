@@ -31,12 +31,21 @@ F_Principale::F_Principale( GestionnaireFenetre *gf,  QWidget *parent ) :
     QMainWindow( parent ),
     ui( new Ui::F_Principale )
 {
+    muiNombreContenant = 0;
     muiNombreLot = 0;
     mptrGestionnaireFenetre = gf;
     muiNombreArticle = 0;
     if( ui )ui->setupUi( this );
     modeleTreeView = new QStandardItemModel;
     ui->tvLAS->setModel( modeleTreeView );
+
+//Ecriture des titres de colonnes dans la table de contenants
+    model2 = new QStandardItemModel( 100, 3 );
+    model2->setHorizontalHeaderItem( 0, new QStandardItem( "Numéro de contenant" ) );
+    model2->setHorizontalHeaderItem( 1, new QStandardItem( "Masse nette" ) );
+    model2->setHorizontalHeaderItem( 2, new QStandardItem( "Fractionné" ) );
+
+    ui->tableV->setModel( model2 );
 }
 
 
@@ -79,33 +88,11 @@ void F_Principale::fnAfficherLAS(
 void F_Principale::fnAfficherNouvelArticle(
         const std::string & numArticle, const std::string & libArticle )
 {
-    std::string strBase =  "Numero Article : " + numArticle +
-            "    Libelle de l'article' : " + libArticle;
-    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
-    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
-    switch( muiNombreArticle % 3 )
-    {
-    case 0:
-        if( ui && ui->lbArticle1 )ui->lbArticle1->setText( QString( strBase.c_str() ) );
-        break;
-
-    case 1:
-        if( ui && ui->lbArticle2 )ui->lbArticle2->setText( QString( strBase.c_str() ) );
-        break;
-
-    case 2:
-        if( ui && ui->lbArticle3 )ui->lbArticle3->setText( QString( strBase.c_str() ) );
-        break;
-    default:
-        break;
-     }
-    muiNombreArticle++;
-
     QStandardItem *itemTreeView = new QStandardItem( QString( libArticle.c_str() ) );
     modeleTreeView->appendRow( itemTreeView );
     itemTreeView->setEditable(0);
-
 }
+//A modifier parametres en trop
 
 /**
 * @brief Affichage des informations du nouveau lot dans la fenetre principalle.
@@ -118,27 +105,6 @@ void F_Principale::fnAfficherLot(
         const std::string & sNumeroLot,
         const std::string & sMasseTot )
 {
-    std::string strBase =  "Libelle Article : " + sChoixArticle +
-            "    Numero de lot' : " + sNumeroLot + "    Numero de lot' : " + sMasseTot;
-    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
-    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
-    switch( muiNombreLot % 3 )
-    {
-    case 0:
-       if( ui && ui->lbLot1  ) ui->lbLot1->setText( QString( strBase.c_str() ) );
-        break;
-
-    case 1:
-        if( ui && ui->lbLot2 )ui->lbLot2->setText( QString( strBase.c_str() ) );
-        break;
-
-    case 2:
-        if( ui && ui->lbLot3 )ui->lbLot3->setText( QString( strBase.c_str() ) );
-        break;
-    default:
-        break;
-     }
-    muiNombreLot++;
 
     QStandardItem *ptrItem = trouverItemArticleModel( sChoixArticle );
     if( NULL == ptrItem )
@@ -152,14 +118,15 @@ void F_Principale::fnAfficherLot(
         itemTreeView->setEditable(0);
     }
 }
+//A modifier parametres en trop
 
 /**
  * @brief Trouve l'Item correspondant a l'article correspondant au libelle envoye en parametre.
- * @param sLibelleArticle
- * @return
+ * @param sLibelleArticle le libelle de l'article
+ * @return L'adresse de l'objet representatif de l'article recherche dans le QTreeView.
+ * NULL si l'objet n'a pas ete trouve.
  */
-QStandardItem *F_Principale::trouverItemArticleModel( /*const int & column ,*/
-                                                      const std::string & sLibelleArticle )
+QStandardItem *F_Principale::trouverItemArticleModel( const std::string & sLibelleArticle )
 {
     QStandardItem *retour = NULL;
    // QString qsNumeroDeLot( sLibelleArticle.c_str() ) ;
@@ -179,9 +146,12 @@ QStandardItem *F_Principale::trouverItemArticleModel( /*const int & column ,*/
 
 
 /**
- * @brief Trouve l'Item correspondant a l'article correspondant au libelle envoye en parametre.
- * @param sLibelleArticle
- * @return
+ * @brief Trouve l'Item correspondant au lot correspondant au libelle et au numero de lot
+ * envoye en parametre.
+ * @param sLibelleArticle le libelle de l'article.
+ * @param sNumeroLot le numero de lot.
+ * @return L'adresse de l'objet representatif du lot recherche dans le QTreeView.
+ * NULL si l'objet n'a pas ete trouve.
  */
 QStandardItem *F_Principale::trouverItemLotModel(  const std::string & sLibelleArticle,
         const std::string & sNumeroLot )
@@ -210,42 +180,42 @@ QStandardItem *F_Principale::trouverItemLotModel(  const std::string & sLibelleA
 /**
 * @brief Affichage des informations du nouveau contenant dans la fenetre principalle.
 *
-* @param : sChaineAEcrire : Chaine a ecrire dans une des etiquettes.
+* @param : sMasseCont : La masse nette du contenant.
+* @param : bCompl : Le booleen determinant si le contenant est complet ou fractionne.
+* @param : sNumCont : Le numero du contenant.
 */
-void F_Principale::fnAfficherContenant( const std::string & sLibArt, const std::string & sNumLot
-                                        , const std::string & sNumCont)
+void F_Principale::fnAfficherContenant( const std::string & sMasseCont,
+                                        const bool & bCompl,
+                                        const std::string & sNumCont)
 {
-    //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
-    //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
-    /*switch( muiNombreContenant % 3 )
+
+    model2->setItem( muiNombreContenant, 0, new QStandardItem( QString( sNumCont
+                                                                        .c_str() ) ));
+    model2->setItem( muiNombreContenant, 1, new QStandardItem( QString( sMasseCont
+                                                                        .c_str() ) ));
+    if( bCompl )
     {
-    case 0:
-       if( ui && ui->lbContenant1  ) ui->lbContenant1->setText( QString( sChaineAEcrire.c_str() ) );
-        break;
+        model2->setItem( muiNombreContenant, 2, new QStandardItem( QString( "Complet" ) ) );
+    }
+    else
+    {
+        model2->setItem( muiNombreContenant, 2, new QStandardItem( QString( "Fractionne" ) ) );
 
-    case 1:
-        if( ui && ui->lbContenant2 )ui->lbContenant2->setText( QString( sChaineAEcrire.c_str() ) );
-        break;
+    }
 
-    case 2:
-        if( ui && ui->lbContenant3 )ui->lbContenant3->setText( QString( sChaineAEcrire.c_str() ) );
-        break;
-    default:
-        break;
-     }
-    muiNombreContenant++;*/
+    muiNombreContenant++;
 
-    QStandardItem *ptrItem = trouverItemLotModel( sLibArt, sNumLot );// a debuger))))))))))
+    /*QStandardItem *ptrItem = trouverItemLotModel( sLibArt, sNumLot );// a debuger))))))))))
     if( NULL == ptrItem )
     {
         return;
     }
     else
     {
-        QStandardItem *itemTreeView = new QStandardItem( QString( sNumCont.c_str() ) );
-        ptrItem->appendRow( itemTreeView );
-        itemTreeView->setEditable(0);
-    }
+        QStandardItem *item = new QStandardItem( QString( sNumCont.c_str() ) );
+        ptrItem->appendRow( item );
+        //itemTreeView->setEditable(0);
+    }*/
 }
 
 /**

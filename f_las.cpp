@@ -70,15 +70,18 @@ void F_LAS::on_btValider_clicked()
 }
 
 /**
+* @brief Reception du signal du bouton de fermeture de la fenetre LAS.
+*/
+void F_LAS::on_btAnnuler_clicked()
+{
+    close();
+}
+
+/**
 * @brief Destructeur de la classe F_LAS.
 * Supression de l'interface d'édition de la fenêtre.
 */
 F_LAS::~F_LAS()
 {
     delete ui;
-}
-
-void F_LAS::on_btAnnuler_clicked()
-{
-    close();
 }

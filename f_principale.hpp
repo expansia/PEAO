@@ -50,7 +50,7 @@ private:
     //std::list<std::string> lstLibelleArticle;
     unsigned int muiNombreArticle, muiNombreLot, muiNombreContenant; //TMP
     GestionnaireFenetre *mptrGestionnaireFenetre;
-    QStandardItemModel *modeleTreeView;
+    QStandardItemModel *modeleTreeView, *model2;
 
     Ui::F_Principale *ui;
 
@@ -63,7 +63,7 @@ public:
     QStandardItem *trouverItemLotModel(const std::string & sLibelleArticle ,  const std::string & sNumeroLot);
     void fnAfficherNouvelArticle(
     const std::string &numArticle, const std::string & libArticle );
-    void fnAfficherContenant( const std::string & sLibArt, const std::string & sNumLot
+    void fnAfficherContenant(const std::string & sLibArt, const bool &bCompl
                                             , const std::string & sNumCont);
     ~F_Principale();
 

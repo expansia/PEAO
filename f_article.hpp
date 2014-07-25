@@ -9,6 +9,16 @@ namespace Ui {
 class F_Article;
 }
 
+/**
+ * @class F_Article
+ * @brief Classe contenant le formulaire de création d'un article.
+ *
+ * Cette classe est invoquée lorsque l'utilisateur clique sur le bouton
+ * "ajouter article" de la fenêtre principalle.
+ * Elle permet de renseigner le libellé de l'article et le numéro d'article.
+ * Ces informations sont transmises à l'objet "PEAO".
+ *
+ */
 class F_Article : public QDialog
 {
     Q_OBJECT

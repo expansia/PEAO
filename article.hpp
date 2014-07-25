@@ -6,6 +6,15 @@
 
 class Lot;
 
+/**
+ * @class Article
+ * @brief Classe Representant un Article.
+ *
+ * Cette classe possede le numéro d'article ainsi que le libellé de l'article.
+ * Elle comporte egalement la liste des lots qui lui sont associes.
+ * Elle assure la gestion de ces derniers.
+ *
+ */
 class Article
 {
 
