@@ -37,29 +37,29 @@ class Las;
  * //Lancement du programme et affichage de la fenetre principale
  *
  */
-class PEAO
+class Peao
 {
 private:
     bool mb_OperationEnCours;
     GestionnaireFenetre *mGF_gestFenetre;
     Las *mLas;
 public:
-    PEAO();
+    Peao();
     bool bfnLancerProgrammePrincipal();
     void fnInitialiserOperation();
     void fnQuitterOperation();
     bool bfnOperationEnCours()const;
-    bool fnReceptionnerInformationsCreationLAS(const std::string &qsCodeProcess, const std::string &sNumLot);
-    bool fnReceptionnerInformationsCreationArticle(const std::string& sNumArt, const std::string& sLibArt);
-    bool bfnReceptionnerInformationsCreationLot(const std::string &sChoixArticle,
-                                                const std::string &sNumeroLot, const std::string &sMasseTot);
-    bool bfnAjouterContenant(const std::string &sLibArticle,
-                             const std::string &sNumLotArticle,
-                             const std::string &sMasseNetteContenant,
-                             const std::string &sNumContenant,
-                             const bool &bContComplet );
+    bool fnCreerLAS( const std::string & qsCodeProcess, const std::string & sNumLot );
+    bool fnCreerArticle( const std::string & sNumArt, const std::string & sLibArt );
+    bool bfnCreerLot( const std::string & sChoixArticle,
+                                                const std::string & sNumeroLot, const std::string & sMasseTot );
+    bool bfnAjouterContenant( const std::string & sLibArticle,
+                             const std::string & sNumLotArticle,
+                             const std::string & sMasseNetteContenant,
+                             const std::string & sNumContenant,
+                             const bool & bContComplet );
     const std::list<std::string> *lstfnRetourListeLibelle()const;
-    ~PEAO();
+    ~Peao();
 };
 
 #endif // PEAO_HPP

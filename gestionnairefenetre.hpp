@@ -24,7 +24,7 @@ class F_Lot;
 class F_Principale;
 class F_Contenant;
 class F_Article;
-class PEAO;
+class Peao;
 
 /**
  * @class GestionnaireFenetre
@@ -45,25 +45,26 @@ private:
     F_Principale *mfenetrePrincipale;
     F_LAS *mfenetreLAS;
     F_Article *mfenetreArticle;
-    PEAO *mptrMemoPEAO;
+    Peao *mptrMemoPEAO;
     F_Contenant *mptrMemoFenetreContenant;
     F_Lot *mptrFenetreLot;
 public:
-    GestionnaireFenetre(PEAO *ptrPEAO);
-    bool bfnAfficherFenetre( const unsigned int &choixFenetre );
+    GestionnaireFenetre( Peao * ptrPEAO );
+    bool bfnAfficherFenetre( const unsigned int & choixFenetre );
     bool bfnOperationEnCours();
     void fnInitialiserOperation();
     bool fnDemandeAjoutLot();
-    void fnReceptionnerInformationsCreationLAS( const std::string &sCodeProcess,
-                                        const std::string &sNumLot );
-    void fnReceptionnerInformationsCreationLot(const std::string &sChoixArt,
-                                               const std::string &sNumLot, const std::string &sMasseTotale);
-    void fnReceptionnerInformationsCreationArticle(const std::string &sNumArticle, const std::string &sLibArticle);
-    bool bfnAjouterContenant(const std::string &sLibArt,
-                             const std::string &sNumLotArt,
-                             const std::string &sMasseNetteCont,
-                             const std::string &sNumCont,
-                             const bool &bContCompl );
+    void fnCreerLAS( const std::string & sCodeProcess,
+                                        const std::string & sNumLot );
+    void fnCreerLot( const std::string & sChoixArt,
+                                               const std::string & sNumLot, const std::string & sMasseTotale );
+    void fnCreerArticle( const std::string & sNumArticle,
+                                                   const std::string & sLibArticle );
+    bool bfnAjouterContenant( const std::string & sLibArt,
+                             const std::string & sNumLotArt,
+                             const std::string & sMasseNetteCont,
+                             const std::string & sNumCont,
+                             const bool & bContCompl );
     ~GestionnaireFenetre();
 };
 

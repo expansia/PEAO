@@ -7,7 +7,7 @@
 * @param sNumLot: Numero de lot article.
 * @param sNumLot: Masse totale du lot article.
 */
-Lot::Lot(const std::string &sNumeroLot, const std::string &sMasseTotale)
+Lot::Lot( const std::string & sNumeroLot, const std::string & sMasseTotale )
 {
     msNumeroLotArticle = sNumeroLot;
     msMasseTotale = sMasseTotale;
@@ -22,19 +22,19 @@ Lot::Lot(const std::string &sNumeroLot, const std::string &sMasseTotale)
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool Lot::bfnAjouterContenant( const std::string &sMasseNetteCont,
-                                 const std::string &sNumCont ,
-                                 const bool &bContCompl )
+bool Lot::bfnAjouterContenant( const std::string & sMasseNetteCont,
+                                 const std::string & sNumCont ,
+                                 const bool & bContCompl )
 {
     bool granted = true;
-    Contenant *tmp = new Contenant(sMasseNetteCont, sNumCont, bContCompl);
-    if( NULL == tmp )
+    Contenant *ptrCont = new Contenant( sMasseNetteCont, sNumCont, bContCompl );
+    if( NULL == ptrCont )
     {
         granted = false;
     }
     else
     {
-        mlstContenants.push_back( tmp );
+        mlstContenants.push_back( ptrCont );
     }
     return granted;
 }
@@ -48,7 +48,7 @@ void Lot::fnViderListeContenant()
     //si la liste est vide
     if( mlstContenants.empty() )return;
     for( std::list<Contenant*>::iterator it = mlstContenants.begin() ;
-        it != mlstContenants.end() ; ++it)
+        it != mlstContenants.end() ; ++it )
     {
        if( (*it) )delete (*it);
     }

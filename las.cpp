@@ -7,7 +7,7 @@
 * @param sCodeProcess: Code Process de la LAS.
 * @param sNumLot: Numero de lot de la LAS.
 */
-Las::Las(const std::string &sCodeProcess, const std::string &sNumLot)
+Las::Las( const std::string & sCodeProcess, const std::string & sNumLot )
 {
     msCodeProcess = sCodeProcess;
     msNumeroDeLot = sNumLot;
@@ -20,14 +20,14 @@ Las::Las(const std::string &sCodeProcess, const std::string &sNumLot)
 * @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 * @return false si l'objet Article n'a pas pu etre instancié, true sinon.
 */
-bool Las::fnCreerArticle(const std::string &sNumArticle, const std::string &sLibArticle)
+bool Las::fnCreerArticle( const std::string & sNumArticle, const std::string & sLibArticle )
 {
     //instanciation de l'article avec les parametres
     mlstLibelle.push_back( std::string( sLibArticle ) );
-    Article *tmp = new Article( sNumArticle, sLibArticle );
+    Article *ptrArticle = new Article( sNumArticle, sLibArticle );
     //ajouter l'article a la liste
-    if( NULL != tmp )mlstArticles.push_back(tmp);
-    return NULL != tmp;
+    if( NULL != ptrArticle )mlstArticles.push_back( ptrArticle );
+    return NULL != ptrArticle;
 }
 
 /**
@@ -40,7 +40,7 @@ const std::list<std::string> *Las::fnRetourListeLibelle()const
     {
         return NULL;
     }
-    return &mlstLibelle;
+    return & mlstLibelle;
 }
 
 /**
@@ -50,18 +50,18 @@ const std::list<std::string> *Las::fnRetourListeLibelle()const
 * @param sMasseTotale: La masse totale du lot.
 * @return false si l'objet Lot n'a pas pu etre instancié, true sinon.
 */
-bool Las::bfnReceptionnerInformationsCreationLot(
-        const std::string &sChoixArt, const std::string &sNumLot, const std::string &sMasseTotale)
+bool Las::bfnCreerLot(
+        const std::string & sChoixArt, const std::string & sNumLot, const std::string & sMasseTotale )
 {
     bool granted=false;
-    Article *tmp = ptrArtRetourArticle( sChoixArt );
-    if( NULL == tmp )
+    Article *ptrArticle = ptrArtRetourArticle( sChoixArt );
+    if( NULL == ptrArticle )
     {
         granted = false;
     }
     else
     {
-    granted = tmp -> bfnCreerLot(sNumLot, sMasseTotale);
+    granted = ptrArticle -> bfnCreerLot( sNumLot, sMasseTotale );
     }
     return granted;
 }
@@ -71,11 +71,11 @@ bool Las::bfnReceptionnerInformationsCreationLot(
 * @param sLibelleArt: Le libelle de l'article recherche.
 * @return L'article trouve. NULL si l'article n'a pas ete trouve.
 */
-Article *Las::ptrArtRetourArticle( const std::string &sLibelleArt )
+Article *Las::ptrArtRetourArticle( const std::string & sLibelleArt )
 {
     //recherche dans la liste de l'article correspondant au libelle(sChoixArt)
     for( std::list<Article*>::iterator it = mlstArticles.begin() ;
-        it != mlstArticles.end() ; ++it)
+        it != mlstArticles.end() ; ++it )
     {
         //si l'article est trouve
         if( (*it) && sLibelleArt == (*it)->fnLireLibelleArticle() )
@@ -97,9 +97,9 @@ Article *Las::ptrArtRetourArticle( const std::string &sLibelleArt )
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool Las::bfnAjouterContenant(const std::string &sLibArt, const std::string &sNumLotArt,
-                    const std::string &sMasseNetteCont, const std::string &sNumCont ,
-                    const bool &bContCompl )
+bool Las::bfnAjouterContenant( const std::string & sLibArt, const std::string & sNumLotArt,
+                    const std::string & sMasseNetteCont, const std::string & sNumCont ,
+                    const bool & bContCompl )
 {
     bool granted;
     //reception du pointeur vers le bon article
@@ -125,7 +125,7 @@ void Las::fnViderListeArticle()
     //si la liste est vide
     if( mlstArticles.empty() )return;
     for( std::list<Article*>::iterator it = mlstArticles.begin() ;
-        it != mlstArticles.end() ; ++it)
+        it != mlstArticles.end() ; ++it )
     {
        delete (*it);
     }

@@ -25,29 +25,29 @@
 
 /**
 * @brief Constructeur de la classe GestionnaireFenetre.
-* Liaison de l'objet vers PEAO.
+* Liaison de l'objet vers Peao.
 * Création des fenetres accueillant les menus et les formulaires.
 * Envoi d'un pointeur vers l'objet courrant aux fenetres créées.
-* @param ptrPEAO: pointeur vers la classe PEAO.
+* @param ptrPEAO: pointeur vers la classe Peao.
 */
-GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
+GestionnaireFenetre::GestionnaireFenetre( Peao * ptrPEAO )
 {
     //mptrMemoPEAO=NULL; //BB : à quoi ça sert ?
 
     // BB: il faudrait passer le pointeur vers Gestionnaire de fenêtre
-    // dans le constructeur des fenêtre. Ex: F_LAS(this)
-    mfenetreLAS                 = new F_LAS();
-    mfenetrePrincipale          = new F_Principale();
-    mfenetreArticle             = new F_Article();
-    mptrFenetreLot              = new F_Lot();
-    mptrMemoFenetreContenant    = new F_Contenant();
+    // dans le constructeur des fenêtre. Ex: F_Las(this)
+    mfenetrePrincipale          = new F_Principale( this );
+    mfenetreLAS                 = new F_LAS( this, mfenetrePrincipale );
+    mfenetreArticle             = new F_Article( this, mfenetrePrincipale );
+    mptrFenetreLot              = new F_Lot( this, mfenetrePrincipale );
+    mptrMemoFenetreContenant    = new F_Contenant( this, mfenetrePrincipale );
 
-    //mémorisation du pointeur vers l'objet PEAO
+    //mémorisation du pointeur vers l'objet Peao
     mptrMemoPEAO = ptrPEAO;
 
     /*envoi d'un pointeur de l'objet courant(GestionnaireFenetre)
     vers les classes fenetre*/
-    if( mfenetrePrincipale )
+    /*if( mfenetrePrincipale )
     {
         mfenetrePrincipale->fnMemoPtrGestionnaireFenetre( this );
     }
@@ -66,7 +66,7 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
     if( mptrMemoFenetreContenant )
     {
         mptrMemoFenetreContenant->fnMemoPtrGestionnaireFenetre( this );
-    }
+    }*/
 
 }
 
@@ -76,9 +76,9 @@ GestionnaireFenetre::GestionnaireFenetre(PEAO *ptrPEAO)
 * @param choixFenetre: Un entier determinant la fenetre a afficher.
 * @return false si un probleme est survenu lors de l'affichage. true sinon.
 */
-bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
+bool GestionnaireFenetre::bfnAfficherFenetre( const unsigned int & choixFenetre )
 {
-    switch(choixFenetre)
+    switch( choixFenetre )
     {
     case F_PRINCIPALE:
         if( mfenetrePrincipale )
@@ -120,24 +120,24 @@ bool GestionnaireFenetre::bfnAfficherFenetre(const unsigned int &choixFenetre)
 /**
 * @brief Fonction de recuperation des donnees du formulaire de la LAS.
 * La fonction reçoit le code process ainsi que le numero de lot de LAS
-* et les renvoie a l'objet PEAO
+* et les renvoie a l'objet Peao
 * @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
-void GestionnaireFenetre::fnReceptionnerInformationsCreationLAS(
-        const std::string &sCodeProcess, const std::string &sNumLot)
+void GestionnaireFenetre::fnCreerLAS(
+        const std::string & sCodeProcess, const std::string & sNumLot)
 {
     //verification si l'objet Las a bien ete instancie
-    if( mptrMemoPEAO  && mptrMemoPEAO->fnReceptionnerInformationsCreationLAS(
+    if( mptrMemoPEAO  && mptrMemoPEAO->fnCreerLAS(
                 sCodeProcess, sNumLot ) )
     {
-         if( mfenetrePrincipale )mfenetrePrincipale->fnEcrireInformationsLAS(sCodeProcess, sNumLot);
+         if( mfenetrePrincipale )mfenetrePrincipale->fnAfficherLAS( sCodeProcess, sNumLot );
     }
 }
 
 /**
 * @brief Fonction de recuperation des donnees du formulaire d'un contenant.
-* La fonction transfere les donnees necessaires a la creation d'un contenant a l'objet PEAO.
+* La fonction transfere les donnees necessaires a la creation d'un contenant a l'objet Peao.
 * @param sLibArt: Le libelle de l'article qui possede le lot.
 * @param sNumLotArt: Le numero de lot qui contient le contenant.
 * @param sMasseNetteCont: La masse nette du contenant.
@@ -145,14 +145,14 @@ void GestionnaireFenetre::fnReceptionnerInformationsCreationLAS(
 * @param bContCompl: Le choix entre contenant fractionne et complet.
 * @return true si l'objet Contenant a bien ete instancie, false sinon.
 */
-bool GestionnaireFenetre::bfnAjouterContenant(const std::string &sLibArt, const std::string &sNumLotArt,
-                    const std::string &sMasseNetteCont, const std::string &sNumCont ,
-                    const bool &bContCompl )
+bool GestionnaireFenetre::bfnAjouterContenant( const std::string & sLibArt, const std::string & sNumLotArt,
+                    const std::string & sMasseNetteCont, const std::string & sNumCont ,
+                    const bool & bContCompl )
 {
     bool granted;
     if( !mptrMemoPEAO )return false;
-    granted = mptrMemoPEAO->bfnAjouterContenant(sLibArt, sNumLotArt,sMasseNetteCont, sNumCont, bContCompl);
-    if (true == granted )
+    granted = mptrMemoPEAO->bfnAjouterContenant( sLibArt, sNumLotArt,sMasseNetteCont, sNumCont, bContCompl );
+    if ( true == granted )
     {
         std::string sMemComplet;
         if( true == bContCompl )
@@ -163,9 +163,10 @@ bool GestionnaireFenetre::bfnAjouterContenant(const std::string &sLibArt, const 
         {
             sMemComplet = "fractionne";
         }
-            mfenetrePrincipale -> fnEcrireInformationsContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
-                                           + "Contenant :" + sMemComplet );
-            mptrMemoFenetreContenant -> fnEcrireInformationsContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
+         mfenetrePrincipale -> fnAfficherContenant( sLibArt , sNumLotArt, sNumCont);
+           // mfenetrePrincipale -> fnAfficherContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
+             //                              + "Contenant :" + sMemComplet );
+            mptrMemoFenetreContenant -> fnAfficherContenant( "Numero contenant: " + sNumCont + "Masse nette: " + sMasseNetteCont
                                            + "Contenant :" + sMemComplet );
     }
     return granted;
@@ -174,23 +175,23 @@ bool GestionnaireFenetre::bfnAjouterContenant(const std::string &sLibArt, const 
 /**
 * @brief Fonction de recuperation des donnees du formulaire de la LAS.
 * La fonction reçoit le code process ainsi que le numero de lot de LAS
-* et les renvoie a l'objet PEAO
+* et les renvoie a l'objet Peao
 * @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 * @param sMasseTotale: La masse totale du lot en provenance du formulaire de la LAS.
 */
-void GestionnaireFenetre::fnReceptionnerInformationsCreationLot(const std::string &sChoixArt,
-                                                                const std::string &sNumLot,
-                                                                const std::string &sMasseTotale)
+void GestionnaireFenetre::fnCreerLot( const std::string & sChoixArt,
+                                                                const std::string & sNumLot,
+                                                                const std::string & sMasseTotale )
 {
     //verification si l'objet Lot a bien ete instancie
-    if(  mptrMemoPEAO && mptrMemoPEAO->bfnReceptionnerInformationsCreationLot(
+    if(  mptrMemoPEAO && mptrMemoPEAO->bfnCreerLot(
                 sChoixArt, sNumLot, sMasseTotale ) )
     {
          if( mfenetrePrincipale )
          {
              //Mise a jour des informations dans la fenetre principalle
-             mfenetrePrincipale->fnEcrireInformationsLot(sChoixArt, sNumLot, sMasseTotale);
+             mfenetrePrincipale->fnAfficherLot( sChoixArt, sNumLot, sMasseTotale );
          }
         //Lorsque le lot a ete cree, le formulaire de creation de contenant(de ce lot) est automatiquement appele.
          mptrMemoFenetreContenant->envoiDonneesLot( sChoixArt, sNumLot, sMasseTotale );
@@ -203,20 +204,20 @@ void GestionnaireFenetre::fnReceptionnerInformationsCreationLot(const std::strin
 /**
 * @brief Fonction de recuperation des donnees du formulaire d'e la LAS'un article.
 * La fonction reçoit le numero d'article ainsi que son libelle
-* et les renvoie a l'objet PEAO.
+* et les renvoie a l'objet Peao.
 * @param sCodeProcess: Le code process en provenance du formulaire de la LAS.
 * @param sNumLot: Le numero de lot en provenance du formulaire de la LAS.
 */
-void GestionnaireFenetre::fnReceptionnerInformationsCreationArticle(
-        const std::string &sNumArticle, const std::string &sLibArticle)
+void GestionnaireFenetre::fnCreerArticle(
+        const std::string & sNumArticle, const std::string & sLibArticle )
 {
     //verification si l'objet Article a bien ete instancie
-    if(  mptrMemoPEAO && mptrMemoPEAO->fnReceptionnerInformationsCreationArticle(
+    if(  mptrMemoPEAO && mptrMemoPEAO->fnCreerArticle(
                 sNumArticle, sLibArticle ) )
     {
          if( mfenetrePrincipale )
          {
-             mfenetrePrincipale->fnEcrireInformationsNouvelArticle(sNumArticle, sLibArticle);
+             mfenetrePrincipale->fnAfficherNouvelArticle( sNumArticle, sLibArticle );
          }
     }
     else
@@ -260,7 +261,7 @@ bool GestionnaireFenetre::fnDemandeAjoutLot()
     {
         if( mptrFenetreLot )
         {
-            mptrFenetreLot->fnEditionMenuDeroulantChoixArticle(tmpListLib);
+            mptrFenetreLot->fnEditionMenuDeroulantChoixArticle( tmpListLib );
         }
         bfnAfficherFenetre( F_FORMLOT );
     }
@@ -268,7 +269,7 @@ bool GestionnaireFenetre::fnDemandeAjoutLot()
 }
 
 /**
-* @brief Appel de la fonction pour démarrer une operation PEAO dans l'objet PEAO.
+* @brief Appel de la fonction pour démarrer une operation Peao dans l'objet Peao.
 * Appel de la fonction fninitialiserOperation() par le pointeur mptrMemoPEAO.
 */
 void GestionnaireFenetre::fnInitialiserOperation()
@@ -286,8 +287,8 @@ void GestionnaireFenetre::fnInitialiserOperation()
 GestionnaireFenetre::~GestionnaireFenetre()
 {
     delete mfenetrePrincipale;
-    delete mfenetreLAS;
-    delete mfenetreArticle;
+    //delete mfenetreLAS;
+    /*delete mfenetreArticle;
     delete mptrFenetreLot;
-    delete mptrMemoFenetreContenant;
+    delete mptrMemoFenetreContenant;*/
 }

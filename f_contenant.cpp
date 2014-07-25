@@ -9,12 +9,12 @@
 * Création de l'interface graphique pour éditer la fenêtre.
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
-F_Contenant::F_Contenant(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::F_Contenant)
+F_Contenant::F_Contenant( GestionnaireFenetre *gf,  QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::F_Contenant )
 {
-    mptrGestionnaireFenetre=NULL;
-    ui->setupUi(this);
+    mptrGestionnaireFenetre = gf;
+    ui->setupUi( this );
 }
 
 /**
@@ -24,8 +24,8 @@ F_Contenant::F_Contenant(QWidget *parent) :
 * @param sNumeroLot: Le numero de lot en provenance du formulaire du Lot.
 * @param sMasseTot: La masse totale du lot.
 */
-void F_Contenant::envoiDonneesLot( const std::string &sChoixArticle, const std::string &sNumeroLot,
-                                    const std::string &sMasseTot )
+void F_Contenant::envoiDonneesLot( const std::string & sChoixArticle, const std::string & sNumeroLot,
+                                    const std::string & sMasseTot )
 {
     if( ui && ui->lbMasseTotaleLot )ui->lbMasseTotaleLot->setText( QString( sMasseTot.c_str() ) );
     if( ui && ui->lbLibArt )ui->lbLibArt->setText( QString( sChoixArticle.c_str() ) );
@@ -42,7 +42,7 @@ void F_Contenant::envoiDonneesLot( const std::string &sChoixArticle, const std::
 void F_Contenant::on_btAjoutContenant_clicked()
 {
     bool bContComplet=true;
-    QString textErreur="", receptNumeroContenant, receptMasseNetteCont;
+    QString textErreur = "", receptNumeroContenant, receptMasseNetteCont;
 
     if( ui && ui->leNumCont )receptNumeroContenant = ui->leNumCont->text();
     //recuperation du numéro d'e lot'article du formulaire
@@ -55,22 +55,22 @@ void F_Contenant::on_btAjoutContenant_clicked()
     //recuperation du choix entre complet et fractionne du formulaire
     if(receptNumeroContenant.size() == 0)//si champ numéro de contenant vide
     {
-        textErreur+="Erreur: numéro de contenant non entré \n";
+        textErreur += "Erreur: numéro de contenant non entré \n";
         //Stock du message d'erreur dans la chaine à afficher dans la fenetre de résultat
     }
-    if(receptMasseNetteCont.size() == 0)//si champ masse nette
+    if( receptMasseNetteCont.size() == 0 )//si champ masse nette
     {
-        textErreur+="Erreur: Masse nette contenant non entree\n";
+        textErreur += "Erreur: Masse nette contenant non entree\n";
     }
     if( ( ui && ui->rdContComplet && false == ui->rdContComplet->isChecked() ) &&
             ( ui && ui->rdContFractionne && false == ui->rdContFractionne->isChecked() ) )
         //si choix contenant complet non renseigne
     {
-        textErreur+="Erreur: choix contenant complet ou fractionne non renseigne";
+        textErreur += "Erreur: choix contenant complet ou fractionne non renseigne";
     }
-    if(textErreur.size() != 0)//si message d'erreur
+    if( textErreur.size() != 0 )//si message d'erreur
     {
-        QMessageBox::information(this, "Formulaire Contenant", textErreur);
+        QMessageBox::information( this, "Formulaire Contenant", textErreur );
         //fenetre pour signaler l'erreur
         return;
     }
@@ -83,11 +83,13 @@ void F_Contenant::on_btAjoutContenant_clicked()
                         ui->leMasseNetteCont->text().toStdString(),  ui->leNumCont->text().toStdString() ,
                         bContComplet ) )
                 {
-                    QMessageBox::information(this, "Formulaire Contenant", "Erreur: Le contenant n'a pas pu etre cree");
+                    QMessageBox::information( this, "Formulaire Contenant",
+                                              "Erreur: Le contenant n'a pas pu etre cree" );
                 }
             }
         }
-
+        ui->leNumCont->clear();
+        ui->leMasseNetteCont->clear();
 }
 
 /**
@@ -95,7 +97,7 @@ void F_Contenant::on_btAjoutContenant_clicked()
 *
 * @param : sChaineAEcrire : Chaine a ecrire dans une des etiquettes.
 */
-void F_Contenant::fnEcrireInformationsContenant( const std::string &sChaineAEcrire )
+void F_Contenant::fnAfficherContenant( const std::string & sChaineAEcrire )
 {
     //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
     //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
@@ -118,17 +120,6 @@ void F_Contenant::fnEcrireInformationsContenant( const std::string &sChaineAEcri
     muiNombreContenant++;
 }
 
-
-/**
-* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
-* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
-*/
-void F_Contenant::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
-{
-    mptrGestionnaireFenetre = memoPtrGF;
-}
-
 /**
 * @brief Destructeur de la classe F_Contenant.
 * Supression de l'interface d'édition de la fenêtre.
@@ -136,6 +127,16 @@ void F_Contenant::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 F_Contenant::~F_Contenant()
 {
     delete ui;
+}
+
+/**
+* @brief Reception de l'evenement de femeture de la fenetre.
+* Les champs sont vides.
+*/
+void F_Contenant::closeEvent ( QCloseEvent * e )
+{
+    ui->leNumCont->clear();
+    ui->leMasseNetteCont->clear();
 }
 
 /**

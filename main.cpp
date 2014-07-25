@@ -24,10 +24,10 @@
 * @return 0 si OK, EXIT_FAILURE sinon
 * @see Pour renvoyer vers une autre définition
 */
-int main(int argc, char *argv[])
+int main( int argc, char *argv[] )
 {
-    QApplication a(argc, argv);
-    PEAO peao;
+    QApplication a( argc, argv );
+    Peao peao;
     //GestionnaireFenetre gestFen(peao);
     //peao.addView(gestFen);
     if( false == peao.bfnLancerProgrammePrincipal() )

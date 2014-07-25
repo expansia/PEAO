@@ -16,12 +16,12 @@ private:
     Ui::F_Contenant *ui;
     GestionnaireFenetre *mptrGestionnaireFenetre;
     unsigned int muiNombreContenant;
+    void closeEvent ( QCloseEvent * e );
 public:
-    explicit F_Contenant(QWidget *parent = 0);
-    void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
+    explicit F_Contenant( GestionnaireFenetre *gf,  QWidget *parent = 0 );
     void envoiDonneesLot( const std::string &sChoixArticle, const std::string &sNumeroLot,
-                                        const std::string &sMasseTot );
-    void fnEcrireInformationsContenant( const std::string &sChaineAEcrire );
+                                        const std::string & sMasseTot );
+    void fnAfficherContenant( const std::string & sChaineAEcrire );
     ~F_Contenant();
 
 private slots:

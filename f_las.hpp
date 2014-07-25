@@ -49,8 +49,7 @@ private:
     Ui::F_LAS *ui;
 
 public:
-    explicit F_LAS(QWidget *parent = 0);
-    void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
+    explicit F_LAS( GestionnaireFenetre* gf, QWidget *parent = 0 );
     ~F_LAS();
 
 private slots:

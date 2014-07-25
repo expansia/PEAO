@@ -7,9 +7,9 @@
 * @param sNumContenant: Numero du contenant.
 * @param bContComplet: booleen determinant si il s'agit d'un contenant complet ou fractionne.
 */
-Contenant::Contenant(const std::string &sMasseNetteContenant,
-                     const std::string &sNumContenant,
-                     const bool &bContComplet)
+Contenant::Contenant( const std::string & sMasseNetteContenant,
+                     const std::string & sNumContenant,
+                     const bool & bContComplet )
 {
     msNumeroContenant = sMasseNetteContenant;
     msMasseNette = sNumContenant;

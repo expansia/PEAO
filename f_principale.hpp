@@ -22,6 +22,8 @@
 #include <list>
 
 class GestionnaireFenetre;
+class QStandardItemModel;
+class QStandardItem;
 
 namespace Ui {
 class F_Principale;
@@ -48,16 +50,21 @@ private:
     //std::list<std::string> lstLibelleArticle;
     unsigned int muiNombreArticle, muiNombreLot, muiNombreContenant; //TMP
     GestionnaireFenetre *mptrGestionnaireFenetre;
+    QStandardItemModel *modeleTreeView;
+
     Ui::F_Principale *ui;
 
 public:
-    explicit F_Principale(QWidget *parent = 0);
-    void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
-    void fnEcrireInformationsLAS(const std::string &codeProcess, const std::string &numeroDeLot);
-    void fnEcrireInformationsLot(const std::string &sChoixArticle, const std::string &sNumeroLot, const std::string &sMasseTot);
-    void fnEcrireInformationsNouvelArticle(
-    const std::string &numArticle, const std::string &libArticle);
-    void fnEcrireInformationsContenant( const std::string &sChaineAEcrire );
+    explicit F_Principale( GestionnaireFenetre *gf,  QWidget * parent = 0 );
+    void fnAfficherLAS( const std::string & codeProcess, const std::string & numeroDeLot );
+    void fnAfficherLot( const std::string & sChoixArticle, const std::string & sNumeroLot,
+                                  const std::string & sMasseTot );
+    QStandardItem *trouverItemArticleModel(const std::string & qsNumeroLot );
+    QStandardItem *trouverItemLotModel(const std::string & sLibelleArticle ,  const std::string & sNumeroLot);
+    void fnAfficherNouvelArticle(
+    const std::string &numArticle, const std::string & libArticle );
+    void fnAfficherContenant( const std::string & sLibArt, const std::string & sNumLot
+                                            , const std::string & sNumCont);
     ~F_Principale();
 
 private slots:
@@ -66,6 +73,5 @@ private slots:
     void on_btnQuitterOperation_clicked();
     void on_btnAjouterArticle_clicked();
     void on_btnAjouterLot_clicked();
-    void on_btnAjoutertLot_clicked();
 };
 #endif // F_PRINCIPALE_HPP

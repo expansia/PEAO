@@ -26,21 +26,12 @@
 * Création de l'interface graphique pour éditer la fenêtre.
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
-F_LAS::F_LAS(QWidget *parent) :
+F_LAS::F_LAS( GestionnaireFenetre *gf, QWidget * parent ) :
     QDialog(parent),
     ui(new Ui::F_LAS)
 {
-    if( ui )ui->setupUi(this);
-}
-
-/**
-* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
-* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
-*/
-void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
-{
-    mptrGestionnaireFenetre = memoPtrGF;
+    if( ui )ui->setupUi( this );
+    mptrGestionnaireFenetre = gf ;
 }
 
 /**
@@ -51,42 +42,32 @@ void F_LAS::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 */
 void F_LAS::on_btValider_clicked()
 {
-    QString textAAfficher="", receptNumeroDeLot, receptCodeProcess;
+    QString textAAfficher = "", receptNumeroDeLot, receptCodeProcess;
     if( ui && ui->leNumLot )receptNumeroDeLot = ui->leNumLot->text();
     //recuperation du numéro de lot du formulaire
     if( ui && ui->leCodeProcess )receptCodeProcess = ui->leCodeProcess->text();
     //recuperation du code process du formulaire
-    if(receptNumeroDeLot.size() == 0)//si champ numéro de lot vide
+    if( receptNumeroDeLot.size() == 0 )//si champ numéro de lot vide
     {
-        textAAfficher+="Erreur: numéro de lot non entré \n";
+        textAAfficher += "Erreur: numéro de lot non entré \n";
         //Stock du message d'erreur dans la chaine à afficher dans la fenetre de résultat
     }
-    if(receptCodeProcess.size() == 0)//si champ code process vide
+    if( receptCodeProcess.size() == 0 )//si champ code process vide
     {
-        textAAfficher+="Erreur: code process non entré";
+        textAAfficher += "Erreur: code process non entré";
     }
-    if(textAAfficher.size() != 0)//si message d'erreur
+    if( textAAfficher.size() != 0 )//si message d'erreur
     {
         //Entré de la valeur des champs entrés dans la chaine
-        QMessageBox::information(this, "Formulaire LAS", textAAfficher);
+        QMessageBox::information( this, "Formulaire LAS", textAAfficher );
         //fenetre pour signaler l'erreur
         return;
     }
         //affichage de la fenêtre
-        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLAS(
+        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnCreerLAS(
                      receptCodeProcess.toStdString(),  receptNumeroDeLot.toStdString() );
         close();
 }
-
-/**
-* @brief Reception du signal d'annulation du formulaire de la LAS.
-* La fenetre se ferme.
-*/
-void F_LAS::on_btAnnuler_clicked()
-{
-    close();
-}
-
 
 /**
 * @brief Destructeur de la classe F_LAS.
@@ -95,4 +76,9 @@ void F_LAS::on_btAnnuler_clicked()
 F_LAS::~F_LAS()
 {
     delete ui;
+}
+
+void F_LAS::on_btAnnuler_clicked()
+{
+    close();
 }

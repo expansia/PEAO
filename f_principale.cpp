@@ -19,7 +19,7 @@
 #include "gestionnairefenetre.hpp"
 #include "ui_f_principale.h"
 #include <QMessageBox>
-
+#include <QStandardItemModel>
 
 /**
 * @brief Constructeur de la classe F_Principale.
@@ -27,24 +27,16 @@
 * Création de l'interface graphique pour éditer la fenêtre.
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
-F_Principale::F_Principale(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::F_Principale)
+F_Principale::F_Principale( GestionnaireFenetre *gf,  QWidget *parent ) :
+    QMainWindow( parent ),
+    ui( new Ui::F_Principale )
 {
     muiNombreLot = 0;
-    mptrGestionnaireFenetre = NULL;
+    mptrGestionnaireFenetre = gf;
     muiNombreArticle = 0;
-    if( ui )ui->setupUi(this);
-}
-
-/**
-* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
-* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
-*/
-void F_Principale::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
-{
-    mptrGestionnaireFenetre = memoPtrGF;
+    if( ui )ui->setupUi( this );
+    modeleTreeView = new QStandardItemModel;
+    ui->tvLAS->setModel( modeleTreeView );
 }
 
 
@@ -57,8 +49,8 @@ void F_Principale::on_btnInitialiserOperation_clicked()
     //si une opération est déja en cours
    if( mptrGestionnaireFenetre && mptrGestionnaireFenetre->bfnOperationEnCours() )
    {
-       QMessageBox::information(this, "Impossible de demarrer une nouvelle operation",
-                                "Une operation est deja en cours de traitement");
+       QMessageBox::information( this, "Impossible de demarrer une nouvelle operation",
+                                "Une operation est deja en cours de traitement" );
        return;
    }
     if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnInitialiserOperation();
@@ -71,8 +63,8 @@ void F_Principale::on_btnInitialiserOperation_clicked()
 * @param codeProcess: Code process de la LAS
 * @param numeroDeLot: Numero de lot de la LAS
 */
-void F_Principale::fnEcrireInformationsLAS(
-        const std::string &codeProcess, const std::string &numeroDeLot)
+void F_Principale::fnAfficherLAS(
+        const std::string & codeProcess, const std::string & numeroDeLot )
 {
     std::string strBase = "Code process : " + codeProcess + "    Numero de lot : " + numeroDeLot;
     if( ui && ui-> infoLAS )ui->infoLAS->setText( QString( strBase.c_str() ) );
@@ -84,8 +76,8 @@ void F_Principale::fnEcrireInformationsLAS(
 * @param numArticle: Numero d'article.
 * @param libArticle: Libelle de l'article.
 */
-void F_Principale::fnEcrireInformationsNouvelArticle(
-        const std::string &numArticle, const std::string &libArticle)
+void F_Principale::fnAfficherNouvelArticle(
+        const std::string & numArticle, const std::string & libArticle )
 {
     std::string strBase =  "Numero Article : " + numArticle +
             "    Libelle de l'article' : " + libArticle;
@@ -108,6 +100,11 @@ void F_Principale::fnEcrireInformationsNouvelArticle(
         break;
      }
     muiNombreArticle++;
+
+    QStandardItem *itemTreeView = new QStandardItem( QString( libArticle.c_str() ) );
+    modeleTreeView->appendRow( itemTreeView );
+    itemTreeView->setEditable(0);
+
 }
 
 /**
@@ -116,8 +113,10 @@ void F_Principale::fnEcrireInformationsNouvelArticle(
 * @param numArticle: Numero d'article.
 * @param libArticle: Libelle de l'article.
 */
-void F_Principale::fnEcrireInformationsLot(
-        const std::string &sChoixArticle, const std::string &sNumeroLot, const std::string &sMasseTot)
+void F_Principale::fnAfficherLot(
+        const std::string & sChoixArticle,
+        const std::string & sNumeroLot,
+        const std::string & sMasseTot )
 {
     std::string strBase =  "Libelle Article : " + sChoixArticle +
             "    Numero de lot' : " + sNumeroLot + "    Numero de lot' : " + sMasseTot;
@@ -140,6 +139,71 @@ void F_Principale::fnEcrireInformationsLot(
         break;
      }
     muiNombreLot++;
+
+    QStandardItem *ptrItem = trouverItemArticleModel( sChoixArticle );
+    if( NULL == ptrItem )
+    {
+        return;
+    }
+    else
+    {
+        QStandardItem *itemTreeView = new QStandardItem( QString( sNumeroLot.c_str() ) );
+        ptrItem->appendRow( itemTreeView );
+        itemTreeView->setEditable(0);
+    }
+}
+
+/**
+ * @brief Trouve l'Item correspondant a l'article correspondant au libelle envoye en parametre.
+ * @param sLibelleArticle
+ * @return
+ */
+QStandardItem *F_Principale::trouverItemArticleModel( /*const int & column ,*/
+                                                      const std::string & sLibelleArticle )
+{
+    QStandardItem *retour = NULL;
+   // QString qsNumeroDeLot( sLibelleArticle.c_str() ) ;
+    QList<QStandardItem *> lListeArticle = modeleTreeView->findItems( sLibelleArticle.c_str() );
+
+    for( int i = 0 ;i < lListeArticle.size() ; ++i )
+    {
+
+        if( sLibelleArticle.c_str() ==  lListeArticle.at( i )->text() )
+        {
+            retour = lListeArticle.at( i );
+            break;
+        }
+    }
+    return retour;
+}
+
+
+/**
+ * @brief Trouve l'Item correspondant a l'article correspondant au libelle envoye en parametre.
+ * @param sLibelleArticle
+ * @return
+ */
+QStandardItem *F_Principale::trouverItemLotModel(  const std::string & sLibelleArticle,
+        const std::string & sNumeroLot )
+{
+    QStandardItem *retour = NULL;
+    QStandardItem *ptrItemArt = trouverItemArticleModel( sLibelleArticle ), *ptrItemLot;
+    if( NULL != ptrItemArt )
+    {
+        //QString qsNumeroDeLot( sLibelleArticle.c_str() ) ;
+        //QList<QStandardItem *> lListeArticle = ptrItemArt->findItems( sLibelleArticle );
+
+        for( int i = 0 ;i < ptrItemArt->rowCount () ; ++i )
+        {
+            ptrItemLot = ptrItemArt->takeChild ( i );
+            if( QString(sNumeroLot.c_str() ) ==  ptrItemLot->text() )
+            {
+                retour = ptrItemLot;
+                break;
+            }
+        }
+    }
+    return retour;
 }
 
 
@@ -148,11 +212,12 @@ void F_Principale::fnEcrireInformationsLot(
 *
 * @param : sChaineAEcrire : Chaine a ecrire dans une des etiquettes.
 */
-void F_Principale::fnEcrireInformationsContenant( const std::string &sChaineAEcrire )
+void F_Principale::fnAfficherContenant( const std::string & sLibArt, const std::string & sNumLot
+                                        , const std::string & sNumCont)
 {
     //choisir l'etiquette en fonction de la taille de la liste de stockage des libelles
     //si la taille de la liste depasse 3 on choisit l'etiquette en fonction d'un modulo
-    switch( muiNombreContenant % 3 )
+    /*switch( muiNombreContenant % 3 )
     {
     case 0:
        if( ui && ui->lbContenant1  ) ui->lbContenant1->setText( QString( sChaineAEcrire.c_str() ) );
@@ -168,7 +233,19 @@ void F_Principale::fnEcrireInformationsContenant( const std::string &sChaineAEcr
     default:
         break;
      }
-    muiNombreContenant++;
+    muiNombreContenant++;*/
+
+    QStandardItem *ptrItem = trouverItemLotModel( sLibArt, sNumLot );// a debuger))))))))))
+    if( NULL == ptrItem )
+    {
+        return;
+    }
+    else
+    {
+        QStandardItem *itemTreeView = new QStandardItem( QString( sNumCont.c_str() ) );
+        ptrItem->appendRow( itemTreeView );
+        itemTreeView->setEditable(0);
+    }
 }
 
 /**
@@ -194,8 +271,8 @@ void F_Principale::on_btnAjouterArticle_clicked()
     }
     else
     {
-        QMessageBox::information(this, "Impossible d'ajouter un nouvel article",
-                                 "L'operation n'est pas initialisee");
+        QMessageBox::information( this, "Impossible d'ajouter un nouvel article",
+                                 "L'operation n'est pas initialisee" );
     }
 }
 
@@ -207,8 +284,8 @@ void F_Principale::on_btnAjouterLot_clicked()
 {
     if(  mptrGestionnaireFenetre && false == mptrGestionnaireFenetre->fnDemandeAjoutLot() )
     {
-        QMessageBox::information(this, "Impossible d'ajouter un nouveau lot",
-                                 "Veuillez entrer au moins 1 article.");
+        QMessageBox::information( this, "Impossible d'ajouter un nouveau lot",
+                                 "Veuillez entrer au moins 1 article." );
     }
 }
 
@@ -217,6 +294,7 @@ void F_Principale::on_btnAjouterLot_clicked()
 * @brief Destructeur de la classe F_Principale.
 * Supression de l'interface d'édition de la fenêtre.
 */
+
 F_Principale::~F_Principale()
 {
     delete ui;

@@ -9,15 +9,31 @@
 * Création de l'interface graphique pour éditer la fenêtre.
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
-F_Article::F_Article(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::F_Article)
+F_Article::F_Article( GestionnaireFenetre *gf,  QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::F_Article )
 {
-    mptrGestionnaireFenetre=NULL;
+    mptrGestionnaireFenetre = gf;
     if( ui )ui->setupUi(this);
 }
 
+/**
+* @brief Reception du signal du bouton d'annulation du formulaire Article.
+* La fenetre se ferme.
+*/
+void F_Article::on_btAnnulerArt_clicked()
+{
+    close();
+}
 
+/**
+* @brief Reception de l'evenement de femeture de la fenetre.
+* Les champs sont vides.
+*/
+void F_Article::closeEvent ( QCloseEvent * e )
+{
+    ui->leNumArt->clear();
+    ui->leLibArt->clear();}
 
 /**
 * @brief Reception du signal du bouton de soumission du formulaire Article.
@@ -32,35 +48,25 @@ void F_Article::on_btValiderArt_clicked()
     //recuperation du numéro d'e lot'article du formulaire
     if( ui && ui->leLibArt )receptLibelleArticle = ui->leLibArt->text();
     //recuperation du libelle de l'article du formulaire
-    if(receptNumeroArticle.size() == 0)//si champ numéro de lot vide
+    if( receptNumeroArticle.size() == 0 )//si champ numéro de lot vide
     {
-        textErreur+="Erreur: numéro d'article non entré \n";
+        textErreur += "Erreur: numéro d'article non entré \n";
         //Stock du message d'erreur dans la chaine à afficher dans la fenetre de résultat
     }
-    if(receptLibelleArticle.size() == 0)//si champ libelle vide
+    if( receptLibelleArticle.size() == 0 )//si champ libelle vide
     {
-        textErreur+="Erreur: Libelle non entré";
+        textErreur += "Erreur: Libelle non entré";
     }
-    if(textErreur.size() != 0)//si message d'erreur
+    if( textErreur.size() != 0 )//si message d'erreur
     {
-        QMessageBox::information(this, "Formulaire Article", textErreur);
+        QMessageBox::information( this, "Formulaire Article", textErreur );
         //fenetre pour signaler l'erreur
         return;
     }
-        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationArticle(
+        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnCreerArticle(
                         receptNumeroArticle.toStdString(),  receptLibelleArticle.toStdString() );
 
         close();
-}
-
-/**
-* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
-* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
-*/
-void F_Article::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
-{
-    mptrGestionnaireFenetre = memoPtrGF;
 }
 
 /**
@@ -72,11 +78,3 @@ F_Article::~F_Article()
     delete ui;
 }
 
-/**
-* @brief Reception du signal du bouton d'annulation du formulaire Article.
-* La fenetre se ferme.
-*/
-void F_Article::on_btAnnulerArt_clicked()
-{
-    close();
-}

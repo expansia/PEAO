@@ -9,22 +9,12 @@
 * Création de l'interface graphique pour éditer la fenêtre.
 * @param parent: Objet auquel le composant(de Qt) sera lié.
 */
-F_Lot::F_Lot(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::F_Lot)
+F_Lot::F_Lot( GestionnaireFenetre *gf, QWidget * parent ) :
+    QDialog( parent ),
+    ui( new Ui::F_Lot )
 {
-    mptrGestionnaireFenetre = NULL;
-    if( ui )ui->setupUi(this);
-}
-
-/**
-* @brief Mémorisation du pointeur vers l'objet GestionnaireFenetre .
-* Création d'un accés de la fenetre vers l'objet GestionnaireFenetre.
-* @param memoPtrGF: Pointeur vers GestionnaireFenetre.
-*/
-void F_Lot::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
-{
-    mptrGestionnaireFenetre = memoPtrGF;
+    mptrGestionnaireFenetre = gf;
+    if( ui )ui->setupUi( this );
 }
 
 
@@ -33,7 +23,7 @@ void F_Lot::fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF)
 * Et ecriture de ces libelles dans le menu deroulant correspondant.
 * @param ptrListLib: Pointeur constant de la liste de libelle.
 */
-void F_Lot::fnEditionMenuDeroulantChoixArticle(const std::list<std::string> *ptrListLib)
+void F_Lot::fnEditionMenuDeroulantChoixArticle( const std::list<std::string> * ptrListLib )
 {
     //vider le menu deroulant
     if( ui )ui->cbChoixArticle->clear();
@@ -43,7 +33,7 @@ void F_Lot::fnEditionMenuDeroulantChoixArticle(const std::list<std::string> *ptr
            cstIt !=  ptrListLib->end(); ++cstIt)
         {
             //ajout du libelle dans le menu deroulant
-            if( ui && ui->cbChoixArticle )ui->cbChoixArticle->addItem( QString( (*cstIt).c_str() ));
+            if( ui && ui->cbChoixArticle )ui->cbChoixArticle->addItem( QString( ( *cstIt ).c_str() ));
         }
     }
 }
@@ -65,7 +55,7 @@ void F_Lot::on_btAnnulerFormLot_clicked()
 */
 void F_Lot::on_btValiderFormLot_clicked()
 {
-    QString textErreur="", receptNumeroDeLot, receptChoixArticle, receptMasseTotaleLot;
+    QString textErreur = "", receptNumeroDeLot, receptChoixArticle, receptMasseTotaleLot;
     if( ui && ui->leNumLotArticle )receptNumeroDeLot = ui->leNumLotArticle->text();
     //recuperation du numéro de lot du formulaire
     if( ui && ui->cbChoixArticle )receptChoixArticle = ui->cbChoixArticle->currentText();
@@ -74,29 +64,40 @@ void F_Lot::on_btValiderFormLot_clicked()
     //recuperation de la masse totale du formulaire
     if(receptNumeroDeLot.size() == 0)//si champ numéro de lot vide
     {
-        textErreur+="Erreur: numéro de lot non entré \n";
+        textErreur += "Erreur: numéro de lot non entré \n";
         //Stock du message d'erreur dans la chaine à afficher dans la fenetre de résultat
     }
-    if(receptChoixArticle.size() == 0)//si champ code process vide
+    if( receptChoixArticle.size() == 0 )//si champ code process vide
     {
-        textErreur+="Erreur: aucun article selectionne\n";
+        textErreur += "Erreur: aucun article selectionne\n";
     }
-    if(receptMasseTotaleLot.size() == 0)//si champ code process vide
+    if( receptMasseTotaleLot.size() == 0 )//si champ code process vide
     {
-        textErreur+="Erreur: masse totale non entree";
+        textErreur += "Erreur: masse totale non entree";
     }
-    if(textErreur.size() != 0)//si message d'erreur
+    if( textErreur.size() != 0 )//si message d'erreur
     {
         //Entré de la valeur des champs entrés dans la chaine
-        QMessageBox::information(this, "Formulaire LAS", textErreur);
+        QMessageBox::information( this, "Formulaire LAS", textErreur );
         //fenetre pour signaler l'erreur
         return;
     }
         //affichage de la fenêtre
-        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnReceptionnerInformationsCreationLot(
+        if( mptrGestionnaireFenetre )mptrGestionnaireFenetre->fnCreerLot(
                      receptChoixArticle.toStdString(),  receptNumeroDeLot.toStdString(),
-                    receptMasseTotaleLot.toStdString());
+                    receptMasseTotaleLot.toStdString() );
         close();
+}
+
+
+/**
+* @brief Reception de l'evenement de femeture de la fenetre.
+* Les champs sont vides.
+*/
+void F_Lot::closeEvent ( QCloseEvent * e )
+{
+    ui->leNumLotArticle->clear();
+    ui->leMasseTotaleLot->clear();
 }
 
 /**

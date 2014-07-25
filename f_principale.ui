@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>488</width>
-    <height>460</height>
+    <height>702</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -327,6 +327,16 @@
      <string>--</string>
     </property>
    </widget>
+   <widget class="QTreeView" name="tvLAS">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>430</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>lbOperationEnCours</zorder>
    <zorder>infoLAS</zorder>
@@ -349,6 +359,7 @@
    <zorder>lbContenant1</zorder>
    <zorder>lbContenant2</zorder>
    <zorder>lbContenant3</zorder>
+   <zorder>tvLAS</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

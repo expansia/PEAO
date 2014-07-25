@@ -15,10 +15,10 @@ class F_Lot : public QDialog
 private:
     Ui::F_Lot *ui;
     GestionnaireFenetre *mptrGestionnaireFenetre;
+    void closeEvent ( QCloseEvent * e );
 public:
-    explicit F_Lot(QWidget *parent = 0);
-    void fnEditionMenuDeroulantChoixArticle(const std::list<std::string> *ptrListLib);
-    void fnMemoPtrGestionnaireFenetre(GestionnaireFenetre *memoPtrGF);
+    explicit F_Lot( GestionnaireFenetre *gf, QWidget * parent = 0 );
+    void fnEditionMenuDeroulantChoixArticle( const std::list<std::string> * ptrListLib );
     ~F_Lot();
 
 private slots:
