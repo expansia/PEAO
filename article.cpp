@@ -51,7 +51,7 @@ bool Article::bfnAjouterContenant( const std::string & sNumLotArticle,
     {
       granted = ptrLot->bfnAjouterContenant( sMasseNetteContenant, sNumContenant, bContComplet ) ;
     }
-    return granted;
+    return true or false;
 }
 
 /**
